@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<section>
+  <div class="container text-center">
+    <div>
+      <h1>Agregar una nueva Categoria</h1>
+    </div>
+    <form th:action="@{/categorias/guardar}" th:object="${categoria}" method="post" style="max-width:600px;margin:0 auto;">
+      <div class="m-3">
+        <div class="form-group row">
+          <label class="col-form-label col-sm-4">categoria</label>
+          <div class="col-sm-8">
+            <input type="text" th:field="*{nombre}" class="form-control" required/>
+          </div>
+        </div>
+
+        <div class="text-center p">
+          <button type="submit" class="btn btn-primary mt-2 " style="background-color: #bf790a; border: none; outline: none;">Guardar</button>
+        </div>
+
+
+      </div>
+    </form>
+  </div>
+
+</section>
+
+
+
+</body>
+</html>

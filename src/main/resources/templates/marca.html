@@ -1,0 +1,43 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+
+<section>
+    <div class="container text-center">
+        <h2>Marcas</h2>
+        <table class="table table-hover table-dark table-bordered border-primary table-sm align-middle ">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>ACCIONES</th>
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="marca: ${listaMarcas}">
+                <td th:text="${marca.id}"></td>
+                <td th:text="${marca.nombre}"></td>
+                <td>
+                    <a th:href="@{'/marcas/editar'+'/'+${marca.id}}" class="btn btn-info" style="background-color: #bf790a; border: none; outline: none;">editar</a>
+
+
+                    &nbsp;&nbsp;
+                </td>
+            </tr>
+            </tbody>
+        </table>
+
+    </div>
+
+
+</section>
+
+</body>
+</html>

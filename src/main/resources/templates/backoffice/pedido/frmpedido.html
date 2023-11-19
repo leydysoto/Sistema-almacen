@@ -1,0 +1,51 @@
+<!DOCTYPE html>
+<html lang="en">
+<head th:replace="~{basePedido::head}">
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+<script th:src="@{/scripts/web/backoffice/pedido/frmPedido.js}" type="text/javascript"></script>
+
+<div class="container mt-5">
+    <div class="row">
+        <div class="col-md-9"> <!-- Ocupa el 70% de la pantalla -->
+            <div id="productosContenedor" class="row" ></div>
+
+        </div>
+        <div class="col-md-3"> <!-- Ocupa el 30% de la pantalla -->
+            <h1>pedido</h1>
+            <table class="table">
+                <thead>
+                <tr>
+                    <th>Producto</th>
+                    <th>Marca</th>
+                    <th>Cantidad</th>
+                </tr>
+                </thead>
+                <tbody id="tbody">
+
+                </tbody>
+                <tfoot >
+                <tr id="footer">
+                    <th scope="row" colpsan="5">empieza a solicitar</th>
+                </tr>
+                </tfoot>
+
+            </table>
+            <table class="table">
+                <tbody id="bodyFooter">
+                <tr>
+
+
+                </tr>
+                </tbody>
+
+            </table>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

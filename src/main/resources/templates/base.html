@@ -1,0 +1,211 @@
+<!DOCTYPE html>
+<html th:fragment="layout(content)" lang="es" xmlns:th="http://www.w3.org/1999/xhtml">
+<head th:fragment="head">
+    <meta charset="UTF-8">
+    <title>Title</title>
+    <link th:href="@{/styles/bootstrap/bootstrap.css}" rel="stylesheet">
+    <link th:href="@{/styles/fontawesome/all.css}" rel="stylesheet"/>
+    <script th:src="@{/scripts/bootstrap/bootstrap.bundle.js}" type="text/javascript"></script>
+    <script th:src="@{/scripts/jquery/jquery.js}" type="text/javascript"></script>
+
+    <script>
+        function toggleSidebar() {
+            var sidebar = document.getElementById("side-bar");
+            var content = document.getElementById("content");
+
+            if (sidebar.style.width === "320px") {
+                // Si la barra lateral está abierta, ciérrala
+                sidebar.style.width = "0";
+                content.style.marginLeft = "0";
+            } else {
+                // Si la barra lateral está cerrada, ábrela
+                sidebar.style.width = "320px";
+                content.style.marginLeft = "320px";
+            }
+        }
+    </script>
+
+
+    <style>
+        *{
+            margin:0;
+            padding: 0;
+            box-sizing: border-box;
+            font-family: sans-serif;
+        }
+
+        body{
+            background-color:white;
+        }
+
+        .side-bar{
+            background-color: #333;
+            width: 320px;
+            height: 100%;
+            position: fixed;
+            top:60px;
+            left: 0;
+            transition: 0.6s ease;
+            transition-property: left;
+        }
+
+        .side-bar.active{
+            left: 0;
+        }
+
+        .side-bar .menu{
+            width: 100%;
+            margin-top:80px;
+        }
+
+        .side-bar .menu .item{
+            position: relative;
+            cursor: pointer;
+        }
+
+        .side-bar .menu .item a{
+            color:#fff;
+            font-size: 16px;
+            text-decoration: none;
+            display: block;
+            padding: 5px 30px;
+            line-height: 60px;
+        }
+
+        .side-bar .menu .item a:hover{
+            background:#bf790a;
+            transition: 0.3s ease;
+            height: auto;
+        }
+
+        .side-bar .menu .item i{
+            margin-right: 15px;
+        }
+
+        .side-bar .menu .item a .dropdown{
+            position:absolute;
+            right: 0;
+            margin: 20px;
+            transition: 0.3s ease;
+        }
+
+        .sub-menu {
+            background: rgba(255, 255, 255, 0.1);
+            display: none;
+            padding-left: 20px; /* Ajusta según sea necesario */
+        }
+
+        .item:hover .sub-menu {
+            display: block;
+        }
+
+        .rotate{
+            transform: rotate(90deg);
+        }
+
+        .close-btn {
+            position: absolute;
+            color:#fff;
+            font-size: 20px;
+            right: 0;
+            margin: 25px;
+            cursor: pointer;
+        }
+
+        .menu-btn{
+            position:absolute;
+            color:black;
+            font-size: 20px;
+            margin: 25px;
+            cursor: pointer;
+        }
+
+        .navbar-custom {
+            background-color: #bf790a;
+            color: #fff;
+            border: none;
+            height: 60px;
+        }
+
+        .content {
+            margin-left: 350px;
+        }
+    </style>
+
+</head>
+<body>
+
+<nav class="navbar navbar-expand-lg navbar-dark navbar-custom">
+    <div class="container-fluid">
+        <a class="navbar-brand" href="#">Almacen</a>
+        <button class="navbar-toggler" type="button" data-bs-toggle="collapse" data-bs-target="#navbarSupportedContent" aria-controls="navbarSupportedContent" aria-expanded="false" aria-label="Toggle navigation">
+            <span class="navbar-toggler-icon"></span>
+        </button>
+        <div class="collapse navbar-collapse" id="navbarSupportedContent">
+            <ul class="navbar-nav me-auto mb-2 mb-lg-0">
+                <li class="nav-item">
+                    <a class="nav-link active" aria-current="page" href="/">Home</a>
+                </li>
+                <th:block th:if="${user==NULL}">
+                    <li class="nav-item">
+                        <a class="nav-link" href="/register">Register</a>
+                    </li>
+                    <li class="nav-item">
+                        <a class="nav-link" href="/signin">Login</a>
+                    </li>
+                </th:block>
+            </ul>
+        </div>
+    </div>
+</nav>
+
+<div class="side-bar" id="side-bar">
+    <div class="close-btn" onclick="toggleSidebar()">
+        <i class="fas fa-times"></i>
+    </div>
+    <div class="menu">
+        <div class="item">
+            <a class="sub-btn"><i class="fas fa-desktop"></i>Registro<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+                <a th:href="@{/categorias/nuevo}" class="sub-item">categoria</a>
+                <a th:href="@{/marcas/nuevo}" class="sub-item">marca</a>
+                <a th:href="@{/tipoalmacen/listar}" class="sub-item">sección almacén</a>
+                <a th:href="@{/medidas/listar}" class="sub-item">medida</a>
+            </div>
+        </div>
+        <div class="item">
+            <a class="sub-btn"><i class="fas fa-desktop"></i>lista<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+                <a th:href="@{/categorias/listar}" class="sub-item">categoria</a>
+                <a th:href="@{/marcas/listar}" class="sub-item">marca</a>
+                <a th:href="@{/productos/listar}" class="sub-item">producto</a>
+            </div>
+        </div>
+        <div class="item">
+            <a class="sub-btn" href="#"><i class="fas fa-th"></i>Producto<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+                <a th:href="@{/productos/nuevo}" class="sub-item">agregar</a>
+            </div>
+        </div>
+        <div class="item"><a th:href="@{/existencias/listar}"><i class="fas fa-table"></i>existencia</a></div>
+        <div class="item"><a th:href="@{/proveedores/nuevo}"><i class="fas fa-table"></i>proveedor</a></div>
+        <div class="item">
+            <a class="sub-btn"><i class="fas fa-desktop"></i>pedido<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+                <a th:href="@{/pedidos/listar}" class="sub-item">áreas</a>
+            </div>
+        </div>
+        <div class="item"><a href="#"><i class="fas fa-cogs"></i>Setting</a></div>
+        <div class="item"><a href="#"><i class="fas fa-info-circle"></i>About</a></div>
+    </div>
+</div>
+
+<div class="content-container">
+    <div class="content" id="content">
+        <i onClick="toggleSidebar()" class="fa fa-bars m-3"></i>
+        <div th:replace="${content}"></div>
+    </div>
+</div>
+
+</body>
+</html>

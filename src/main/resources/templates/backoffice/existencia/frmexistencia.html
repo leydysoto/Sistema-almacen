@@ -1,0 +1,132 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+th:replace="~{./base :: layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+
+<section>
+    <script th:src="@{/scripts/web/backoffice/existencia/frmExistencia.js}" type="text/javascript"></script>
+
+    <div class="card ">
+        <div class="card-header text-bg-dark mb-3">
+            Mantenimiento de existencia
+        </div>
+        <div class="card-body">
+            <button id="btnagregar"
+                    type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
+            <hr />
+            <div id="mensaje"></div>
+
+            <table id="tblproducto" class="table">
+                <thead>
+                <tr>
+                    <th scope="col">Código exis</th>
+                    <th scope="col">Código producto</th>
+                    <th scope="col">producto</th>
+                    <th scope="col">Categoria</th>
+                    <th scope="col">marca</th>
+                    <th scope="col">medida</th>
+                    <th scope="col">cantidad</th>
+                    <th scope="col">sección-almacen</th>
+                    <th scope="col">Acciones</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="existencia :${listaExistencias}">
+                    <td th:text="${existencia.id}"></td>
+                    <td th:text="${existencia.producto.getId()}"></td>
+                    <td th:text="${existencia.producto.getNombre()}"></td>
+                    <td th:text="${existencia.producto.getCategoria().getNombre()}"></td>
+                    <td th:text="${existencia.producto.getMarca().getNombre()}"></td>
+                    <td th:text="${existencia.producto.getMedida().getNombre()}"></td>
+                    <td th:text="${existencia.cantidad}"></td>
+                    <td th:text="${existencia.producto.getTipoalmacen.getNombre()}"></td>
+                    <td>
+                        <button type="button" class="btn btn-info btnaumentar" th:data-exiscod="${existencia.id}" th:data-movimiento='1' >aumentar</button>
+
+                        <a type="button" class="btn btn-warning btndisminuir" th:data-exiscod="${existencia.id}" th:data-movimiento='-1' >disminuir</a>
+
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+        </div>
+    </div>
+    <div class="modal fade" id="modalNuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabel">EXISTENCIA</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+
+                    <div class="mb-3">
+                        <label for="cbonombreproducto" class="form-label">Nombre</label>
+                        <select id="cbonombreproducto" class="form-control"></select>
+
+                    </div>
+
+                    <div class="mb-3">
+                        <label for="cbocategoria" class="form-label">Categoria</label>
+                        <select id="cbocategoria" class="form-control"></select>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="cbomarca" class="form-label">Marca</label>
+                        <select id="cbomarca" class="form-control"></select>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="cbomedida" class="form-label">Medida</label>
+                        <select id="cbomedida" class="form-control"></select>
+
+                    </div>
+                    <div class="mb-3">
+                        <label for="txtcantidad" class="form-label">cantidad</label>
+                        <input type="number" class="form-control" id="txtcantidad">
+                    </div>
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                    <button type="button" id="btnguardar" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!--model aumentar-->
+    <div class="modal fade" id="modalNuevoMovimiento" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
+        <div class="modal-dialog">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <h1 class="modal-title fs-5" id="exampleModalLabelMovimiento">EXISTENCIA</h1>
+                    <button type="button" class="btn-close" data-bs-dismiss="modal" aria-label="Close"></button>
+                </div>
+                <div class="modal-body">
+                    <div class="mb-3">
+                        <label for="txtcantidadMovimiento" class="form-label">cantidad</label>
+                        <input type="number" class="form-control" id="txtcantidadMovimiento">
+                    </div>
+                    <input type="hidden" id="hddmovimiento" value="0">
+                    <input type="hidden" id="hddCodigoExistencia" value="0">
+
+                </div>
+                <div class="modal-footer">
+                    <button type="button" class="btn btn-secondary" data-bs-dismiss="modal"><i class="fas fa-times"></i> Cancelar</button>
+                    <button type="button" id="btnGuardarIncrementarDisminuir" class="btn btn-primary"><i class="fas fa-save"></i> Guardar</button>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</section>
+</body>
+</html>

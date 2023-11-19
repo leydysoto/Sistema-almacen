@@ -1,0 +1,18 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{base::layout(~{::section})}">
+    <head>
+        <meta charset="UTF-8">
+        <title>Title</title>
+    </head>
+    <body>
+        <section class="text-center">
+            <h1>PÁGINA DE PERFIL</h1>
+            <h5>Name:[[${user.name}]]</h5>
+            <h5>Email:[[${user.email}]]</h5>
+            <h5>Mob NO:[[${user.mobileNo}]]</h5>
+            <h5>Role:[[${user.role}]]</h5>
+            <a href="/logout">Logout</a>
+        </section>
+    </body>
+</html>

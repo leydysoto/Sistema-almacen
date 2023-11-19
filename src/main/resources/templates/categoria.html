@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{base::layout(~{::section})}">
+
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+
+<section>
+    <div class="container text-center">
+        <h2>Categorias</h2>
+        <table class="table table-hover table-dark table-bordered border-primary table-sm align-middle ">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="categoria:${listaCategorias}">
+                <td th:text="${categoria.getId}"></td>
+                <td th:text="${categoria.getNombre}"></td>
+            </tr>
+            </tbody>
+
+        </table>
+
+    </div>
+
+</section>
+
+</body>
+</html>

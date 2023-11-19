@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+
+</head>
+<body>
+
+
+<section>
+    <div class="container text-center">
+        <h2>Productos</h2>
+        <table class="table table-hover table-dark table-bordered border-primary table-sm align-middle ">
+            <thead>
+            <tr>
+                <th>ID</th>
+                <th>NOMBRE</th>
+                <th>PRECIO</th>
+                <th>CATEGORIA</th>
+                <th>MARCA</th>
+                <th>SECCIÓN-ALMACEN</th>
+                <th>MEDiDA</th>
+                <th>ACCIONES</th>
+
+            </tr>
+            </thead>
+            <tbody>
+            <tr th:each="producto: ${listaProductos}">
+                <td th:text="${producto.id}"></td>
+                <td th:text="${producto.nombre}"></td>
+                <td th:text="${producto.costo}"></td>
+                <td th:if="${producto.categoria != null}" th:text="${producto.categoria.nombre}"></td>
+
+                <td th:if="${producto.marca != null}" th:text="${producto.marca.nombre}"></td>
+                <td th:if="${producto.tipoalmacen !=null}" th:text="${producto.Tipoalmacen.nombre}"></td>
+                <td th:if="${producto.medida !=null}" th:text="${producto.medida.nombre}"></td>
+                <td>
+                    <a th:href="@{'/productos/editar'+'/' + ${producto.id}}" class="btn btn-info" style="background-color: #bf790a; border: none; outline: none;">editar</a>
+
+                </td>
+            </tr>
+            </tbody>
+
+
+        </table>
+
+    </div>
+
+</section>
+
+
+
+</body>
+</html>

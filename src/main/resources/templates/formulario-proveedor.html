@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <section>
+        <div class="container mt-5 ">
+            <h1 th:if="${proveedor.id==null}" class="text-center ">Agregar un nuevo proveedor</h1>
+            <h1 th:unless="${proveedor.id==null}" class="text-center ">editar un proveedor</h1>
+            <form th:action="@{/proveedores/guardar}" th:object="${proveedor}" method="post" class="shadow-lg p-4 border bg-light rounded-1" style="max-width: 600px; margin: 0 auto " >
+                <input type="hidden" th:field="*{id}" th:value="${proveedor.id}">
+                <div class="m-3 ">
+                    <div class="form-group row mb-3 text-left">
+                        <label class="col-form-label col-sm-4">ingrese Razó social:</label>
+                        <div class="col-sm-8">
+                            <input type="text" th:field="*{razonSocial}" class="form-control" required/>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3 text-left">
+                        <label class="col-form-label col-sm-4">ingrese distrito:</label>
+                        <div class="col-sm-8">
+                            <input type="text" th:field="*{distrito}" class="form-control" required/>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3 text-left">
+                        <label class="col-form-label col-sm-4">ingrese direccion:</label>
+                        <div class="col-sm-8">
+                            <input type="text" th:field="*{direccion}" class="form-control" required/>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3 text-left">
+                        <label class="col-form-label col-sm-4">ingrese telefono:</label>
+                        <div class="col-sm-8">
+                            <input type="text" th:field="*{telefono}" class="form-control" required/>
+                        </div>
+                    </div>
+                    <div class="form-group row mb-3 text-left">
+                        <label class="col-form-label col-sm-4">ingrese correo:</label>
+                        <div class="col-sm-8">
+                            <input type="text" th:field="*{Email}" class="form-control" required/>
+                        </div>
+                    </div>
+
+                    <div class="row d-flex align-items-center">
+                        <div class="col-md-5 mb-3 text-left">Ingrese Tipo de Persona:</div>
+                        <div th:each="tp:${tipoPersonas}" class="col-md-3">
+                            <div class="checkbox">
+                                <input type="checkbox" th:field="*{tipopersona}" th:value="${tp.id}">
+                                <label th:text="${tp.nombre}"></label>
+                            </div>
+                        </div>
+                    </div>
+
+
+                    <div class="row d-flex align-items-center">
+                        <div class="col-md-3 mb-3 text-left">Ingrese Tipo de documento:</div>
+                        <div th:each="td:${tipoDocumentos}" class="col-md-3 text-center">
+                            <div class="checkbox">
+                                <input type="checkbox" th:field="*{tipodocumento}" th:value="${td.id}">
+                                <label th:text="${td.nombre}"></label>
+                            </div>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label class="col-form-label col-sm-4 text-left">ingrese numero de documento:</label>
+                        <div class="col-sm-8">
+                            <input type="text" th:field="*{numerodocumento}" class="form-control" required/>
+                        </div>
+                    </div>
+
+                    <div class="form-group row mb-3">
+                        <label class="col-form-label col-sm-4 text-left">escoge uno o más productos:</label>
+                        <div class="col-sm-8">
+                            <select th:field="*{productos}" class="form-control" multiple="multiple" required>
+                                <th:block th:each="product: ${listaProductos}">
+                                    <option th:text="${product}" th:value="${product.id}"></option>
+                                </th:block>
+                            </select>
+
+                        </div>
+                    </div>
+                    <div class="row m-3">
+                        <div class="text-center col-md-4">
+                            <button class="btn btn-outline-primary mt-2 " type="reset" style="background-color: #bf790a; border: none; outline: none;">limpiar</button>
+                        </div>
+                        <div class="text-center col-md-8">
+                            <button type="submit" class="btn btn-primary mt-2 " style="background-color: #bf790a; border: none; outline: none;">Guardar</button>
+                        </div>
+
+                    </div>
+
+                </div>
+            </form>
+        </div>
+
+    </section>
+
+</body>
+</html>
