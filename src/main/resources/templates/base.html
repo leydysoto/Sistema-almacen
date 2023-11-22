@@ -179,6 +179,7 @@
                 <a th:href="@{/categorias/listar}" class="sub-item">categoria</a>
                 <a th:href="@{/marcas/listar}" class="sub-item">marca</a>
                 <a th:href="@{/productos/listar}" class="sub-item">producto</a>
+                <a th:href="@{/proveedores/listar}" class="sub-item">proveedor</a>
             </div>
         </div>
         <div class="item">
@@ -188,7 +189,8 @@
             </div>
         </div>
         <div class="item"><a th:href="@{/existencias/listar}"><i class="fas fa-table"></i>existencia</a></div>
-        <div class="item"><a th:href="@{/proveedores/nuevo}"><i class="fas fa-table"></i>proveedor</a></div>
+        <div class="item"><a th:href="@{/proveedores/nuevo}"><i class="fas fa-table"></i>proveedor</a>
+        </div>
         <div class="item">
             <a class="sub-btn"><i class="fas fa-desktop"></i>pedido<i class="fas fa-angle-right dropdown"></i></a>
             <div class="sub-menu">
@@ -196,7 +198,7 @@
             </div>
         </div>
         <div class="item"><a href="#"><i class="fas fa-cogs"></i>Setting</a></div>
-        <div class="item"><a href="#"><i class="fas fa-info-circle"></i>About</a></div>
+        <div class="item"><a th:href="@{/logout}"><i class="fas fa-info-circle"></i>salir</a></div>
     </div>
 </div>
 
