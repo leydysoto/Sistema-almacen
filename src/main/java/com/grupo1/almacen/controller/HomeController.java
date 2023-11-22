@@ -44,10 +44,6 @@ public class HomeController {
     }
     //fin de prueba
 
-    @GetMapping("/")
-    public String index(){
-        return "index";
-    }
 
     @GetMapping("/register")
     public String register( Model model)
