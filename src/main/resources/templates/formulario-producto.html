@@ -18,7 +18,7 @@
                 <h1 th:if="${producto.id==null}">Agregar un nuevo producto</h1>
                 <h1 th:unless="${producto.id==null}">Editar Producto</h1>
             </div>
-            <form th:action="@{/productos/guardar}" th:object="${producto}" method="post" class="shadow-lg p-4 border bg-light rounded-1" style="max-width: 800px; margin: 0 auto;margin-top: 20px; padding: 20px;"enctype="multipart/form-data" >
+            <form th:action="@{/productos/guardar}" th:object="${producto}" method="post" class="shadow-lg p-4 border bg-light rounded-1" style="max-width: 900px; margin: 0 auto;margin-top: 20px; padding: 20px;"enctype="multipart/form-data" >
                 <input type="hidden" th:field="*{id}" th:value="${producto.id}">
                 <div class="row g-3">
                     <div class="form-group col-md-6">
