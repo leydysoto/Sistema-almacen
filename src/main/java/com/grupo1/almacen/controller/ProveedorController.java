@@ -33,9 +33,8 @@ public class ProveedorController {
     }
     @GetMapping("/proveedores/nuevo")
     public String formularioProveedor(Model model){
-        List<Producto> listaProductos=productoRepository.findAll();
         model.addAttribute("proveedor", new Proveedor());
-        model.addAttribute("listaProductos",listaProductos);
+        model.addAttribute("listaProductos",productoRepository.findAll());
         model.addAttribute("tipoDocumentos",tipoDocumentoRepository.findAll());
         model.addAttribute("tipoPersonas",tipoPersonaRepository.findAll());
         return "formulario-proveedor";

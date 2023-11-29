@@ -31,7 +31,7 @@ public class PedidoController {
     private PedidoService pedidoService;
     private DetallePedidoService detallePedidoService;
 
-    @GetMapping("/pedidos/listar")
+    @GetMapping("/pedidos")
     public String lista() {
         return "backoffice/pedido/frmPedido";
     }
@@ -68,6 +68,15 @@ public class PedidoController {
         });
 
         return productoResponses;
+    }
+    @GetMapping("/pedidos/listar")
+    public String muestralistaPedidos() {
+        return "backoffice/pedido/Pedido";
+    }
+    @GetMapping("/pedidos/listarPedidos")
+    @ResponseBody
+    public List<PedidoResponse>listaPedidos(){
+        return pedidoService.listaPedidos();
     }
 
     @PostMapping("/pedidos/guardarPedido")

@@ -1,5 +1,6 @@
 package com.grupo1.almacen.entity;
 
+import com.grupo1.almacen.entity.enun.Estado;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -16,6 +17,7 @@ public class Pedido {
     private String numero;
     private Date fechaCreacion;
     private Date fechaRecibida;
+    private Estado estado;
     @ManyToOne
     @JoinColumn(name="usuario_id")
     private User usuario;
