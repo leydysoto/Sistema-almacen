@@ -13,11 +13,11 @@ public class Proveedor {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
-    private String razonSocial;
+    private String razon_social;
     private String distrito;
     private String direccion;
     private String telefono;
-    private String Email;
+    private String email;
     private String numerodocumento;
     private boolean activo=true;
 
@@ -33,5 +33,6 @@ public class Proveedor {
     @OneToMany()
     @JoinColumn(name="proveedor_id")
     private List<Producto>productos=new ArrayList<>();
+
 
 }
