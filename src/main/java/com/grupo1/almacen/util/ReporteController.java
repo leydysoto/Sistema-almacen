@@ -3,6 +3,7 @@ package com.grupo1.almacen.util;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
+import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
 
@@ -13,13 +14,24 @@ public class ReporteController {
     @Autowired
     private ProveedorReporteService proveedorReporteService;
 
+    @GetMapping("/reporte/")
+    public String generarReport(Model model) throws JRException, FileNotFoundException {
+        String path = proveedorReporteService.exportarReporte();
+        //implementar un if de si existe path que se mande esto
+        model.addAttribute("mensaje", "¡El reporte se generó y descargó exitosamente!");
 
+        model.addAttribute("mostrarMensaje", true);
 
-    @GetMapping("report/")
-    public String generarReport() throws JRException, FileNotFoundException {
-        return  proveedorReporteService.exportarReporte();
-
+        return "redirect:/exito";
     }
+    @GetMapping("/exito")
+    public String exito(Model model) {
+        return "reporte";
+    }
+
+
+
+
     //videos para orientarme en la generacion de reportes
     //https://www.youtube.com/watch?v=YnZZm-P7lPs&t=1154s
     //la maldita programadora bytes

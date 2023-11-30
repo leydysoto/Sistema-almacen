@@ -11,6 +11,8 @@ import org.springframework.util.ResourceUtils;
 
 import java.io.File;
 import java.io.FileNotFoundException;
+import java.text.SimpleDateFormat;
+import java.util.Date;
 import java.util.HashMap;
 import java.util.List;
 import java.util.Map;
@@ -35,8 +37,11 @@ public class ProveedorReporteService {
         JasperReport jasperReport= JasperCompileManager.compileReport(file.getAbsolutePath());
 
         JasperPrint jasperPrint=JasperFillManager.fillReport(jasperReport,parameters, new JREmptyDataSource());
+
+        String timestamp = new SimpleDateFormat("yyyyMMdd_HHmmss").format(new Date());
         String path="C:\\Reporte";
-        JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\proveedores.pdf");
+        String fileName = "proveedores_" + timestamp + ".pdf";
+        JasperExportManager.exportReportToPdfFile(jasperPrint,path+"\\"+ fileName);
 
         return "reporte generado en la ruta:"+path;
     }
