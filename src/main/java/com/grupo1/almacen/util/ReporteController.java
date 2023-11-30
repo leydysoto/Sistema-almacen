@@ -25,14 +25,19 @@ public class ReporteController {
     @GetMapping("/reporte/")
     public String generarReport(Model model) throws JRException, FileNotFoundException {
         String path = proveedorReporteService.exportarReporte();
+        //implementar un if de si existe path que se mande esto
+        String mensaje = "¡El reporte se generó y descargó exitosamente!";
+        return "redirect:/reporte/proveedor?mensaje=" + URLEncoder.encode(mensaje, StandardCharsets.UTF_8);
 
-        String mensaje = path != null ? "¡El reporte se generó y descargó exitosamente!" : null;
+    }
+    @GetMapping("/reporte/proveedor")
+    public String mostrarProveedor(@RequestParam(name = "mensaje", required = false) String mensaje, Model model) {
+        List<Proveedor> listaProveedor = proveedorRepository.findAll();
+        model.addAttribute("listaProveedor", listaProveedor);
         model.addAttribute("mensaje", mensaje);
-        List<Proveedor> listaProveedor =proveedorRepository.findAll();
-        model.addAttribute("listaProveedor",listaProveedor);
-
         return "proveedor";
     }
+
 
 
 

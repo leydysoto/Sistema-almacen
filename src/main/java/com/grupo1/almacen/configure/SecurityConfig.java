@@ -37,19 +37,27 @@ public class SecurityConfig {
     @Bean
     public SecurityFilterChain filterChain(HttpSecurity http) throws Exception {
         http.csrf().disable()
-                .authorizeHttpRequests().requestMatchers("/marcas/**","/user/**","/categorias/**","/productos/**","/existencias/**","/backoffice/**","/pedidos/**","/medidas/**","/tipoalmacen/**","/proveedores/**","/reporte/**").hasRole("USER")
-                .requestMatchers("/admin/**").hasRole("ADMIN")
-                .requestMatchers("/","/register","/signin","/saveUser").permitAll()
-                .requestMatchers("/styles/**", "/scripts/**").permitAll()
-                .requestMatchers("/uploads/**").permitAll()
-                /*.requestMatchers("/user/**").authenticated()*/
-                .and()
-                .formLogin().loginPage("/signin").loginProcessingUrl("/userLogin")
-                /*.defaultSuccessUrl("/user/profile").permitAll();*/
-                .successHandler(sucessHandler)
-                /*.and().logout().permitAll();*/
-                .permitAll();
+
+                .authorizeHttpRequests(
+                auth->
+                        auth.requestMatchers("/styles/**", "/scripts/**","/uploads/**",
+                                "/","/register","/signin","/saveUser"
+                                ).permitAll()
+                                .requestMatchers("/marcas/**","/user/**","/categorias/**","/productos/**","/existencias/**","/backoffice/**","/pedidos/**","/medidas/**","/tipoalmacen/**","/proveedores/**","/reporte/**").hasRole("USER")
+                                .requestMatchers("/user/**").authenticated()
+
+
+                ).formLogin(formLogin ->
+                        formLogin
+                                .loginPage("/signin")
+                                .loginProcessingUrl("/userLogin")
+
+                                .successHandler(sucessHandler)
+                                .permitAll()
+                );
+
         return http.build();
+
     }
 
 }
