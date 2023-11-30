@@ -1,33 +1,39 @@
 package com.grupo1.almacen.util;
 
+import com.grupo1.almacen.entity.Proveedor;
+import com.grupo1.almacen.repository.ProveedorRepository;
 import net.sf.jasperreports.engine.JRException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PathVariable;
+import org.springframework.web.bind.annotation.RequestParam;
 
 import java.io.FileNotFoundException;
+import java.net.URLEncoder;
+import java.nio.charset.StandardCharsets;
+import java.util.List;
 
 @Controller
 public class ReporteController {
     @Autowired
     private ProveedorReporteService proveedorReporteService;
+    @Autowired
+    private ProveedorRepository proveedorRepository;
 
     @GetMapping("/reporte/")
     public String generarReport(Model model) throws JRException, FileNotFoundException {
         String path = proveedorReporteService.exportarReporte();
-        //implementar un if de si existe path que se mande esto
-        model.addAttribute("mensaje", "¡El reporte se generó y descargó exitosamente!");
 
-        model.addAttribute("mostrarMensaje", true);
+        String mensaje = path != null ? "¡El reporte se generó y descargó exitosamente!" : null;
+        model.addAttribute("mensaje", mensaje);
+        List<Proveedor> listaProveedor =proveedorRepository.findAll();
+        model.addAttribute("listaProveedor",listaProveedor);
 
-        return "redirect:/exito";
+        return "proveedor";
     }
-    @GetMapping("/exito")
-    public String exito(Model model) {
-        return "reporte";
-    }
+
 
 
 
