@@ -25,8 +25,7 @@ public class ReporteController {
     @GetMapping("/reporte/")
     public String generarReport(Model model) throws JRException, FileNotFoundException {
         String path = proveedorReporteService.exportarReporte();
-        //implementar un if de si existe path que se mande esto
-        String mensaje = "¡El reporte se generó y descargó exitosamente!";
+        String mensaje = (path != null && !path.isEmpty()) ? "¡El reporte se generó y descargó exitosamente!" : "¡Error al generar el reporte!";
         return "redirect:/reporte/proveedor?mensaje=" + URLEncoder.encode(mensaje, StandardCharsets.UTF_8);
 
     }
