@@ -1,4 +1,4 @@
-package com.grupo1.almacen.entity.dto;
+package com.grupo1.almacen.entity.dto.request;
 
 public interface NombreProductoProjection {
     //interfas de proyeccion

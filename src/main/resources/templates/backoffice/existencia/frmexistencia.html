@@ -21,7 +21,7 @@ th:replace="~{./base :: layout(~{::section})}">
             <hr />
             <div id="mensaje"></div>
 
-            <table id="tblproducto" class="table">
+            <table id="tblexistencia" class="table">
                 <thead>
                 <tr>
                     <th scope="col">Código exis</th>
@@ -48,7 +48,7 @@ th:replace="~{./base :: layout(~{::section})}">
                     <td>
                         <button type="button" class="btn btn-info btnaumentar" th:data-exiscod="${existencia.id}" th:data-movimiento='1' >aumentar</button>
 
-                        <a type="button" class="btn btn-warning btndisminuir" th:data-exiscod="${existencia.id}" th:data-movimiento='-1' >disminuir</a>
+                        <button type="button" class="btn btn-warning btndisminuir" th:data-exiscod="${existencia.id}" th:data-movimiento='-1'> disminuir</button>
 
 
                     </td>
@@ -69,7 +69,6 @@ th:replace="~{./base :: layout(~{::section})}">
                     <div class="mb-3">
                         <label for="cbonombreproducto" class="form-label">Nombre</label>
                         <select id="cbonombreproducto" class="form-control"></select>
-
                     </div>
 
                     <div class="mb-3">

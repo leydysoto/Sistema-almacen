@@ -59,13 +59,29 @@ $(document).ready(()=>{
                     type:"DELETE",
                     dataType:"json",
                     success:function(resultado){
-                        $("#messages").html(resultado.mensaje).css("display","block");
+                        let mensajeHtml = `<span>${resultado.mensaje}</span><button id="btn-close">x</button>`;
+                        $("#messages").html(mensajeHtml).css("display","block");
+                        $("#btn-close").css({
+                            background: "#FFC300",
+                            color: "#fff",
+                            border: "none",
+                            cursor: "pointer",
+                            padding: "5px 10px",
+                            "margin-left": "5px"
+
+                        });
                         listaMedidas();
                     }
                 })
             }
         })
     }
+    function ocultarMensaje(){
+        $(document).on("click","#btn-close",function (){
+            $(this).parent().css("display","none");
+        })
+    }
+
 
     function limpiar(){
         $('#txtnombre').val('');
@@ -73,10 +89,11 @@ $(document).ready(()=>{
 
     listaMedidas();
     guardarMedida();
-    eliminarMedida ()
+    eliminarMedida ();
+    ocultarMensaje();
 
 
 })
 
 
-/*$("#btnguardar").on("click",function (){*/
+

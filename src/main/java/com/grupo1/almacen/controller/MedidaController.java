@@ -1,14 +1,11 @@
 package com.grupo1.almacen.controller;
 
-import com.grupo1.almacen.entity.Categoria;
 import com.grupo1.almacen.entity.Medida;
-import com.grupo1.almacen.entity.dto.ExistenciaRequestDTO;
-import com.grupo1.almacen.entity.dto.ResultadoResponse;
+import com.grupo1.almacen.entity.dto.response.ResultadoResponse;
 import com.grupo1.almacen.repository.MedidaRepository;
 import com.grupo1.almacen.service.MedidaService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.*;
 
 import java.util.List;

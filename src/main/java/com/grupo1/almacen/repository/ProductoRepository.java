@@ -1,10 +1,9 @@
 package com.grupo1.almacen.repository;
 
 import com.grupo1.almacen.entity.Producto;
-import com.grupo1.almacen.entity.dto.NombreProductoProjection;
+import com.grupo1.almacen.entity.dto.request.NombreProductoProjection;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.data.jpa.repository.Query;
-import org.springframework.data.repository.query.Param;
 import org.springframework.stereotype.Repository;
 
 import java.util.List;

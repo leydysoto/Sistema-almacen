@@ -4,7 +4,11 @@ import com.grupo1.almacen.entity.Categoria;
 import com.grupo1.almacen.entity.Existencia;
 import com.grupo1.almacen.entity.Marca;
 import com.grupo1.almacen.entity.Medida;
-import com.grupo1.almacen.entity.dto.*;
+import com.grupo1.almacen.entity.dto.request.ExistenciaRequestDTO;
+import com.grupo1.almacen.entity.dto.request.MovimientoRequestDTO;
+import com.grupo1.almacen.entity.dto.request.NombreProductoProjection;
+import com.grupo1.almacen.entity.dto.response.ExistenciaResponse;
+import com.grupo1.almacen.entity.dto.response.ResultadoResponse;
 import com.grupo1.almacen.repository.*;
 import com.grupo1.almacen.service.ExistenciaService;
 import lombok.AllArgsConstructor;
@@ -37,10 +41,8 @@ public class ExistenciaController2 {
 
     @GetMapping("/existencias/listarExistencias")
     @ResponseBody
-    public List<Existencia>listaExistencia(){
-
+    public List<ExistenciaResponse>listaExistencia(){
         return existenciaService.listarExistencia();
-
     }
 
 
@@ -83,7 +85,7 @@ public class ExistenciaController2 {
     }
     @PostMapping("/existencias/aumentardisminuir")
     @ResponseBody
-    public ResultadoResponse aumentarDisminuirExistencia(@RequestBody  MovimientoRequestDTO movimientoRequestDTO){
+    public ResultadoResponse aumentarDisminuirExistencia(@RequestBody MovimientoRequestDTO movimientoRequestDTO){
         return existenciaService.aumentarDisminuir(movimientoRequestDTO);
     }
 

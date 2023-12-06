@@ -3,10 +3,9 @@ package com.grupo1.almacen.service;
 
 import com.grupo1.almacen.entity.Existencia;
 import com.grupo1.almacen.entity.Producto;
-import com.grupo1.almacen.entity.dto.ExistenciaRequestDTO;
-import com.grupo1.almacen.entity.dto.ExistenciaResponseDTO;
-import com.grupo1.almacen.entity.dto.MovimientoRequestDTO;
-import com.grupo1.almacen.entity.dto.ResultadoResponse;
+import com.grupo1.almacen.entity.dto.request.ExistenciaRequestDTO;
+import com.grupo1.almacen.entity.dto.request.MovimientoRequestDTO;
+import com.grupo1.almacen.entity.dto.response.*;
 import com.grupo1.almacen.repository.ExistenciaRepository;
 import com.grupo1.almacen.repository.ProductoRepository;
 import lombok.AllArgsConstructor;
@@ -23,8 +22,41 @@ public class ExistenciaService {
     private ExistenciaRepository existenciaRepository;
     private ProductoRepository productoRepository;
 
-    public List<Existencia> listarExistencia() {
-        List<Existencia> listarExistencia = existenciaRepository.findAll();
+    public List<ExistenciaResponse> listarExistencia() {
+        List<Existencia> Existencias = existenciaRepository.findAll();
+        List<ExistenciaResponse>listarExistencia=new ArrayList<>();
+        Existencias.forEach( existencia->{
+            ExistenciaResponse existenciaResponse=ExistenciaResponse.builder()
+                    .id(existencia.getId())
+                    .cantidad(existencia.getCantidad())
+                    .producto(ProductoResponse.builder()
+                            .id(existencia.getProducto().getId())
+                            .nombre(existencia.getProducto().getNombre())
+                            .costo(existencia.getProducto().getCosto())
+                            .foto(existencia.getProducto().getFoto())
+                            .categoria(CategoriaResponse.builder()
+                                    .id(existencia.getProducto().getCategoria().getId())
+                                    .nombre(existencia.getProducto().getCategoria().getNombre())
+                                    .build())
+                            .marca(MarcaResponse.builder()
+                                    .id(existencia.getProducto().getMarca().getId())
+                                    .nombre(existencia.getProducto().getMarca().getNombre())
+                                    .build())
+                            .medida(MedidaResponse.builder()
+                                    .id(existencia.getProducto().getMedida().getId())
+                                    .nombre(existencia.getProducto().getMedida().getNombre())
+                                    .build())
+                            .tipoAlmacen(TipoAlmacenResponse.builder()
+                                    .id(existencia.getProducto().getTipoalmacen().getId())
+                                    .nombre(existencia.getProducto().getTipoalmacen().getNombre())
+                                    .build())
+                            .build()
+
+                    ).build();
+                    listarExistencia.add(existenciaResponse);
+
+        });
+
         return listarExistencia;
     }
 
@@ -122,5 +154,6 @@ public class ExistenciaService {
         cantidadActual=(cantidaddisponible-loqueingresa)+limite;
         //tambien
         loqueingresa>0 &&loqueingresa>cantidaddisponible*/
+
 
 

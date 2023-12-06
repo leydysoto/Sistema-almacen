@@ -79,6 +79,7 @@ function listarCombos(){
             }),
             success: function(resultado){
                 alert(resultado.mensaje);
+                listarExistencias();
                 $("#modalNuevo").modal("hide");
             },
             error:function (xhr,status,error){
@@ -120,7 +121,9 @@ function listarCombos(){
             }),
             success: function(resultado){
                 alert(resultado.mensaje);
+                listarExistencias();
                 $("#modalNuevoMovimiento").modal("hide");
+
             },
             error:function (xhr,status,error){
                 if(xhr.response.JSON && xhr.responseJSON.mensaje){
@@ -132,6 +135,40 @@ function listarCombos(){
             }
         })
     })
+
+    function listarExistencias(){
+        $.ajax({
+            type: "GET",
+            url: "/existencias/listarExistencias",
+            dataType: "json",
+            success: function(resultado){
+                $("#tblexistencia > tbody").html("");
+                $.each(resultado, function(index, value){
+                    $("#tblexistencia > tbody").append("<tr>" +
+                        "<td>"+value.id+"</td>"+
+                        "<td>"+value.producto.id+"</td>"+
+                        "<td>"+value.producto.nombre+"</td>"+
+                        "<td>"+value.producto.categoria.nombre+"</td>"+
+                        "<td>"+value.producto.marca.nombre+"</td>"+
+                        "<td>"+value.producto.medida.nombre+"</td>"+
+                        "<td>"+value.cantidad+"</td>"+
+                        "<td>"+value.producto.tipoAlmacen.nombre+"</td>"+
+                        "<td>"+
+                        "<button type='button' class='btn btn-info btnaumentar'" +
+                        " data-exiscod='"+value.id+"'"+
+                        " data-movimiento='"+1+"'"+
+                        ">Aumentar</button>"+
+                        "<button type='button' class='btn btn-warning btndisminuir'" +
+                        " data-exiscod='"+value.id+"'"+
+                        " data-movimiento='"+-1+"'"+
+                        ">Disminuir</button>"+
+                        "</td></tr>"
+                    );
+                });
+            }
+        });
+    }
+
 
 
 }

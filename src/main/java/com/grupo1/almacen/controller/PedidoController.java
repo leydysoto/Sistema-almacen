@@ -3,17 +3,14 @@ package com.grupo1.almacen.controller;
 import com.grupo1.almacen.entity.DetallePedido;
 import com.grupo1.almacen.entity.Pedido;
 import com.grupo1.almacen.entity.Producto;
-import com.grupo1.almacen.entity.dto.DetallePedidoDTO;
-import com.grupo1.almacen.entity.dto.ResultadoResponse;
+import com.grupo1.almacen.entity.dto.request.DetallePedidoDTO;
+import com.grupo1.almacen.entity.dto.response.ResultadoResponse;
 import com.grupo1.almacen.entity.dto.response.*;
-import com.grupo1.almacen.repository.PedidoRepository;
 import com.grupo1.almacen.repository.ProductoRepository;
 import com.grupo1.almacen.service.DetallePedidoService;
 import com.grupo1.almacen.service.PedidoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
-import org.springframework.stereotype.Repository;
-import org.springframework.ui.Model;
 import org.springframework.web.bind.annotation.GetMapping;
 import org.springframework.web.bind.annotation.PostMapping;
 import org.springframework.web.bind.annotation.RequestBody;
@@ -71,7 +68,7 @@ public class PedidoController {
     }
     @GetMapping("/pedidos/listar")
     public String muestralistaPedidos() {
-        return "backoffice/pedido/Pedido";
+        return "backoffice/pedido/pedido";
     }
     @GetMapping("/pedidos/listarPedidos")
     @ResponseBody

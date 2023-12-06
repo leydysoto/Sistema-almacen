@@ -1,4 +1,4 @@
-package com.grupo1.almacen.entity.dto;
+package com.grupo1.almacen.entity.dto.response;
 
 import lombok.AllArgsConstructor;
 import lombok.Builder;

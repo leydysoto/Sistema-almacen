@@ -9,30 +9,37 @@
   <section>
       <script th:src="@{/scripts/web/backoffice/pedido/pedido.js}" type="text/javascript"></script>
 
-      <div class="container text-center">
-          <h2>PEDIDOS</h2>
-          <table class="table table-hover table-dark table-bordered border-primary table-sm align-middle ">
-              <thead>
-              <tr>
-                  <th>ID</th>
-                  <th>Número</th>
-                  <th>Fecha Creación</th>
-                  <th>Fecha Recibida</th>
-                  <th>Estado</th>
-                  <th>usuario</th>
-                  <th>ACCIONES</th>
+      <div class="container col-md-12">
+          <div class="row">
+              <div class="text-center col-md-9">
+                  <h2>PEDIDOS</h2>
+                  <table class="table table-hover table-dark table-bordered border-primary table-sm align-middle">
+                      <thead>
+                      <tr>
+                          <th>ID</th>
+                          <th>Número</th>
+                          <th>Fecha Creación</th>
+                          <th>Fecha Recibida</th>
+                          <th>Estado</th>
+                          <th>Usuario</th>
+                          <th>ACCIONES</th>
+                      </tr>
+                      </thead>
+                      <tbody id="body">
+                      <!-- pedidos-->
+                      </tbody>
+                  </table>
+              </div>
+              <aside class="ladoderecho col-md-3">
+                  <!--detalles pedidos-->
 
-              </tr>
-              </thead>
-              <tbody id="body">
-              <!--aqui se renderiza-->
-
-              </tbody >
-
-
-          </table>
-
+              </aside>
+          </div>
       </div>
+
+
+
+
 
   </section>
 
