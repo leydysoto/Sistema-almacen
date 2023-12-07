@@ -98,8 +98,11 @@ function listarCombos(){
         $("#hddmovimiento").val($(this).attr("data-movimiento"));
         $("#hddCodigoExistencia").val($(this).attr("data-exiscod"));
         $("#modalNuevoMovimiento").modal("show");
-
     })
+
+
+
+
     $(document).on("click",".btndisminuir",function (){
         $("#txtcantidadMovimiento").val("");
         $("#hddmovimiento").val($(this).attr("data-movimiento"));
@@ -107,6 +110,9 @@ function listarCombos(){
         $("#modalNuevoMovimiento").modal("show");
 
     })
+
+
+
    $(document).on("click","#btnGuardarIncrementarDisminuir",function (){
         $.ajax({
             type: "POST",

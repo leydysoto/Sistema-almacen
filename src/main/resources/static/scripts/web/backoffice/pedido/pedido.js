@@ -79,7 +79,7 @@ $(document).ready(() => {
                 </select>
             </div>
             <div style="margin-bottom: 20px;">
-                <a href="#" class="btn btn-primary">EXISTENCIA</a>
+                <a href="/existencias/listar?idPedido=${pedido.idPedido}" class="btn btn-primary">EXISTENCIA</a>
             </div>
         `;
 

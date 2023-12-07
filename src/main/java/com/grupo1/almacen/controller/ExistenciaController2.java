@@ -23,7 +23,7 @@ import java.util.Map;
 @AllArgsConstructor
 @Controller
 public class ExistenciaController2 {
-    private ExistenciaRepository existenciaRepository;
+    private PedidoService pedidoService;
     private ExistenciaService existenciaService;
     private CategoriaRepository categoriaRepository;
     private MarcaRepository marcaRepository;
@@ -34,13 +34,13 @@ public class ExistenciaController2 {
 
 
     @GetMapping("/existencias/listar")
-    public String muestraexistencias(Model model){
-        /*if(idPedido!=null){
+    public String muestraexistencias(@RequestParam(name = "idPedido", required = false) Long idPedido, Model model){
+        if(idPedido!=null){
             PedidoResponse pedido =pedidoService.encontrarPedido(idPedido);
             model.addAttribute("pedido",pedido);
         }else{
 
-        }*/
+        }
         model.addAttribute("listaExistencias",existenciaService.listarExistencia());
 
         return "backoffice/existencia/frmexistencia";
