@@ -1,16 +1,15 @@
 package com.grupo1.almacen.controller;
 
-import com.grupo1.almacen.entity.Categoria;
-import com.grupo1.almacen.entity.Existencia;
-import com.grupo1.almacen.entity.Marca;
-import com.grupo1.almacen.entity.Medida;
+import com.grupo1.almacen.entity.*;
 import com.grupo1.almacen.entity.dto.request.ExistenciaRequestDTO;
 import com.grupo1.almacen.entity.dto.request.MovimientoRequestDTO;
 import com.grupo1.almacen.entity.dto.request.NombreProductoProjection;
 import com.grupo1.almacen.entity.dto.response.ExistenciaResponse;
+import com.grupo1.almacen.entity.dto.response.PedidoResponse;
 import com.grupo1.almacen.entity.dto.response.ResultadoResponse;
 import com.grupo1.almacen.repository.*;
 import com.grupo1.almacen.service.ExistenciaService;
+import com.grupo1.almacen.service.PedidoService;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Controller;
 import org.springframework.ui.Model;
@@ -25,7 +24,6 @@ import java.util.Map;
 @Controller
 public class ExistenciaController2 {
     private ExistenciaRepository existenciaRepository;
-
     private ExistenciaService existenciaService;
     private CategoriaRepository categoriaRepository;
     private MarcaRepository marcaRepository;
@@ -33,9 +31,18 @@ public class ExistenciaController2 {
     private ProductoRepository productoRepository;
 
 
+
+
     @GetMapping("/existencias/listar")
     public String muestraexistencias(Model model){
-        model.addAttribute("listaExistencias",existenciaRepository.findAll());
+        /*if(idPedido!=null){
+            PedidoResponse pedido =pedidoService.encontrarPedido(idPedido);
+            model.addAttribute("pedido",pedido);
+        }else{
+
+        }*/
+        model.addAttribute("listaExistencias",existenciaService.listarExistencia());
+
         return "backoffice/existencia/frmexistencia";
     }
 

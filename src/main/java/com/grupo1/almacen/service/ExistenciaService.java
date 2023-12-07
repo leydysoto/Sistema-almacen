@@ -151,9 +151,9 @@ public class ExistenciaService {
 }
 
 /*cantidaddisponible =cantidadActual-limite;
-        cantidadActual=(cantidaddisponible-loqueingresa)+limite;
+        cantidadActual=(cantidaddisponible-loqueRetira)+limite;
         //tambien
-        loqueingresa>0 &&loqueingresa>cantidaddisponible*/
+        loqueRetira>0 &&loqueRetira>cantidaddisponible*/
 
 
 

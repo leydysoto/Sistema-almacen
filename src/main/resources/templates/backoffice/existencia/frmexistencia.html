@@ -11,52 +11,70 @@ th:replace="~{./base :: layout(~{::section})}">
 <section>
     <script th:src="@{/scripts/web/backoffice/existencia/frmExistencia.js}" type="text/javascript"></script>
 
-    <div class="card ">
-        <div class="card-header text-bg-dark mb-3">
-            Mantenimiento de existencia
-        </div>
-        <div class="card-body">
-            <button id="btnagregar"
-                    type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
-            <hr />
-            <div id="mensaje"></div>
 
-            <table id="tblexistencia" class="table">
-                <thead>
-                <tr>
-                    <th scope="col">Código exis</th>
-                    <th scope="col">Código producto</th>
-                    <th scope="col">producto</th>
-                    <th scope="col">Categoria</th>
-                    <th scope="col">marca</th>
-                    <th scope="col">medida</th>
-                    <th scope="col">cantidad</th>
-                    <th scope="col">sección-almacen</th>
-                    <th scope="col">Acciones</th>
-                </tr>
-                </thead>
-                <tbody>
-                <tr th:each="existencia :${listaExistencias}">
-                    <td th:text="${existencia.id}"></td>
-                    <td th:text="${existencia.producto.getId()}"></td>
-                    <td th:text="${existencia.producto.getNombre()}"></td>
-                    <td th:text="${existencia.producto.getCategoria().getNombre()}"></td>
-                    <td th:text="${existencia.producto.getMarca().getNombre()}"></td>
-                    <td th:text="${existencia.producto.getMedida().getNombre()}"></td>
-                    <td th:text="${existencia.cantidad}"></td>
-                    <td th:text="${existencia.producto.getTipoalmacen.getNombre()}"></td>
-                    <td>
-                        <button type="button" class="btn btn-info btnaumentar" th:data-exiscod="${existencia.id}" th:data-movimiento='1' >aumentar</button>
+            <div class="card ">
+                <div class="card-header text-bg-dark mb-3">
+                    Mantenimiento de existencia
+                </div>
+                <div class="card-body">
+                    <button id="btnagregar"
+                            type="button" class="btn btn-primary"><i class="fas fa-plus"></i> Agregar</button>
+                    <hr />
+                    <div id="mensaje"></div>
 
-                        <button type="button" class="btn btn-warning btndisminuir" th:data-exiscod="${existencia.id}" th:data-movimiento='-1'> disminuir</button>
+                    <table id="tblexistencia" class="table">
+                        <thead>
+                        <tr>
+                            <th scope="col">Código exis</th>
+                            <th scope="col">Código producto</th>
+                            <th scope="col">producto</th>
+                            <th scope="col">Categoria</th>
+                            <th scope="col">marca</th>
+                            <th scope="col">medida</th>
+                            <th scope="col">cantidad</th>
+                            <th scope="col">sección-almacen</th>
+                            <th scope="col">Acciones</th>
+                        </tr>
+                        </thead>
+                        <tbody>
+                        <tr th:each="existencia :${listaExistencias}">
+                            <td th:text="${existencia.id}"></td>
+                            <td th:text="${existencia.producto.getId()}"></td>
+                            <td th:text="${existencia.producto.getNombre()}"></td>
+                            <td th:text="${existencia.producto.getCategoria().getNombre()}"></td>
+                            <td th:text="${existencia.producto.getMarca().getNombre()}"></td>
+                            <td th:text="${existencia.producto.getMedida().getNombre()}"></td>
+                            <td th:text="${existencia.cantidad}"></td>
+                            <td th:text="${existencia.producto.getTipoAlmacen.getNombre()}"></td>
+                            <td>
+                                <button type="button" class="btn btn-info btnaumentar" th:data-exiscod="${existencia.id}" th:data-movimiento='1' >aumentar</button>
+
+                                <button type="button" class="btn btn-warning btndisminuir" th:data-exiscod="${existencia.id}" th:data-movimiento='-1'> disminuir</button>
 
 
-                    </td>
-                </tr>
-                </tbody>
-            </table>
-        </div>
-    </div>
+                            </td>
+                        </tr>
+                        </tbody>
+                    </table>
+                </div>
+            </div>
+
+
+
+        <!--<div class="col-md-4">
+            <div th:if="${pedido !=null}">
+                <h3>Datos del Pedido</h3>
+                <p th:text="${pedido.idPedido}"></p>
+                <h3>Productos del Pedido</h3>
+
+            </div>
+            <div th:unless="${pedido != null}">
+                <p>No se ha proporcionado un ID de pedido.</p>
+            </div>
+        </div>-->
+
+
+
     <div class="modal fade" id="modalNuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

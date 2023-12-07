@@ -65,7 +65,7 @@ $(document).ready(() => {
             `;
             detallesHtml += '';
             pedido.detallePedidos.forEach(detalle => {
-                detallesHtml += `<li>${detalle.producto.nombre} - ${detalle.cantidad}-${detalle.producto.medida.nombre}-${detalle.producto.marca.nombre}</li>`;
+                detallesHtml += `<li data-id=${detalle.producto.id}>${detalle.producto.nombre} - ${detalle.cantidad}-${detalle.producto.medida.nombre}-${detalle.producto.marca.nombre}</li>`;
             });
             detallesHtml += `
                 </ul>
@@ -79,7 +79,7 @@ $(document).ready(() => {
                 </select>
             </div>
             <div style="margin-bottom: 20px;">
-                <a href="/existencias/listar" class="btn btn-primary">EXISTENCIA</a>
+                <a href="#" class="btn btn-primary">EXISTENCIA</a>
             </div>
         `;
 

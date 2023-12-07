@@ -108,7 +108,6 @@ function listarCombos(){
 
     })
    $(document).on("click","#btnGuardarIncrementarDisminuir",function (){
-       console.log("antes de la solicitud");
         $.ajax({
             type: "POST",
             url: "/existencias/aumentardisminuir",

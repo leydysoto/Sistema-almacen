@@ -8,6 +8,7 @@ import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 import java.util.stream.Collectors;
 
 @AllArgsConstructor
@@ -53,6 +54,18 @@ public class PedidoService {
         return listaPedidos.stream()
                 .map(this::mapPedidoToPedidoResponse)
                 .collect(Collectors.toList());
+
+    }
+    public PedidoResponse encontrarPedido(Long idPedido) {
+        Optional<Pedido> pedidoOptional = pedidoRepository.findById(idPedido);
+        if (pedidoOptional.isPresent()) {
+            Pedido pedidoEncontrado = pedidoOptional.get();
+            PedidoResponse pedidoResponse = mapPedidoToPedidoResponse(pedidoEncontrado);
+
+            return pedidoResponse;
+        } else {
+            return null;
+        }
 
     }
     private PedidoResponse mapPedidoToPedidoResponse(Pedido pedido) {
