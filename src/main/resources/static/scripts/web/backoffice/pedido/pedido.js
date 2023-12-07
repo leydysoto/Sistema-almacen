@@ -9,6 +9,8 @@ $(document).ready(() => {
                 listaPedidos=resultado;
                 let data = '';
                 resultado.forEach(element => {
+
+
                     let opcionesEstado = `<select class="estado-pedido" data-id="${element.idPedido}">
                                             <option value="PENDIENTE" ${element.estado === "PENDIENTE" ? "selected" : ""}>Pendiente</option>
                                             <option value="HACIENDO" ${element.estado === "HACIENDO" ? "selected" : ""}>Haciendo</option>

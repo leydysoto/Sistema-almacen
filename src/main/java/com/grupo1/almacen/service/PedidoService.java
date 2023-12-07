@@ -6,6 +6,8 @@ import com.grupo1.almacen.repository.PedidoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
 
+import java.text.SimpleDateFormat;
+import java.time.format.DateTimeFormatter;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
@@ -69,11 +71,12 @@ public class PedidoService {
 
     }
     private PedidoResponse mapPedidoToPedidoResponse(Pedido pedido) {
+        SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         return PedidoResponse.builder()
                 .idPedido(pedido.getId())
                 .numero(pedido.getNumero())
-                .fechaCreacion(pedido.getFechaCreacion())
-                .fechaRecibida(pedido.getFechaRecibida())
+                .fechaCreacion(dateFormatter.format(pedido.getFechaCreacion()))
+                .fechaRecibida(pedido.getFechaRecibida()!=null ?dateFormatter.format(pedido.getFechaRecibida()):null)
                 .estado(pedido.getEstado() != null ? pedido.getEstado().toString() : null)
                 .usuario(pedido.getUsuario()!= null ? pedido.getUsuario().getId() : null)
                 .detallePedidos(mapDetallePedidosList(pedido.getDetallePedidos()))
