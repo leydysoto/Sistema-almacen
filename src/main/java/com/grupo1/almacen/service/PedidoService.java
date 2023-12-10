@@ -2,6 +2,7 @@ package com.grupo1.almacen.service;
 
 import com.grupo1.almacen.entity.*;
 import com.grupo1.almacen.entity.dto.response.*;
+import com.grupo1.almacen.entity.enun.Estado;
 import com.grupo1.almacen.repository.PedidoRepository;
 import lombok.AllArgsConstructor;
 import org.springframework.stereotype.Service;
@@ -47,6 +48,34 @@ public class PedidoService {
 
         return numeroConcatenado;
     }
+    public Pedido actualizarEstadoPedido(
+            Long id,
+            String nuevoEstado){
+        try{
+            Pedido pedido = pedidoRepository.findById(id).orElse(null);
+            if(pedido==null){
+                return null;
+            }
+            if(nuevoEstado.equalsIgnoreCase("pendiente")){
+                pedido.setEstado(Estado.PENDIENTE);
+            } else if (nuevoEstado.equalsIgnoreCase("haciendo")) {
+                pedido.setEstado(Estado.HACIENDO);
+            } else if (nuevoEstado.equalsIgnoreCase("hecho")) {
+                pedido.setEstado(Estado.HECHO);
+            } else {
+                return null;
+            }
+            return pedidoRepository.save(pedido);
+
+
+        }catch (Exception e ){
+            return null;
+
+        }
+
+    }
+
+
 
     //crear una lista de los pedidos y sus detalles
     public List<PedidoResponse> listaPedidos(){

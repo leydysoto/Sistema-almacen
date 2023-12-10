@@ -66,9 +66,9 @@ public class ExistenciaService {
             //Busco el producto segun sus propiedades
             Optional<Producto> productoOptional = productoRepository.findFirstByNombreAndCategoriaNombreAndMarcaNombre(existenciaRequestDTO.getNombre(), existenciaRequestDTO.getCategoria(), existenciaRequestDTO.getMarca());
 
-            if (productoOptional.isPresent()) {
+            if (productoOptional.isPresent()) {//producto existe  en la tabla producto ahora puedes agregarle a existencias
                 Producto producto = productoOptional.get();
-                //busco también la existencia si el producto se encuentra registrado en uno.
+                //busco también la existencia, si el producto se encuentra registrado en uno.
                 Optional<Existencia> existenciaOpcional = existenciaRepository.findByProducto(producto);
                 if (existenciaOpcional.isPresent()) {
                     Existencia existencia = existenciaOpcional.get();
@@ -104,12 +104,14 @@ public class ExistenciaService {
                 Producto producto = existencia.getProducto();
 
                 if (producto != null) {
+                    //si se ingresa una cantidad  que sea mayor a cero
                     if (movimientoRequestDTO.getCantidad() > 0) {
                         Integer cantidadActual = existencia.getCantidad();
+                        //movimiento>=1;aumentará  la cantidad de la existencia
                         if (movimientoRequestDTO.getMovimiento() > 0) {
                             Integer cantidadAumentada = cantidadActual + movimientoRequestDTO.getCantidad();
                             existencia.setCantidad(cantidadAumentada);
-                        } else {
+                        } else {//movimiento<=0;disminuirá la cantidad de la existencia
                             Integer limiteMinimo = producto.getLimiteminimo();
                             Integer cantidadDisponible = cantidadActual - limiteMinimo;
                             if(cantidadDisponible>0){
@@ -119,6 +121,7 @@ public class ExistenciaService {
                                     mensaje = "se desconto " + movimientoRequestDTO.getCantidad();
                                 } else {
                                     mensaje = "no se encuentra  disponible para esa cantidad,solo tenemos disponible "+cantidadDisponible;
+                                    //podria hacer que descuente lo suficiente pero prefiero que la persona lo haga.
                                 }
                             }else{
                                 mensaje="no hay productos disponibles para descontar,nos encontramos en el límite mínimo";
@@ -130,6 +133,7 @@ public class ExistenciaService {
                         mensaje = "debes ingresar un valor mayor  a 0";
                     }
                 } else {
+                    //
                     mensaje = "el producto no existe";
                 }
             } else {

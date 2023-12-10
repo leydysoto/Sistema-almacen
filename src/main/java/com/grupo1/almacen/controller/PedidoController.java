@@ -6,15 +6,14 @@ import com.grupo1.almacen.entity.Producto;
 import com.grupo1.almacen.entity.dto.request.DetallePedidoDTO;
 import com.grupo1.almacen.entity.dto.response.ResultadoResponse;
 import com.grupo1.almacen.entity.dto.response.*;
+import com.grupo1.almacen.entity.enun.Estado;
 import com.grupo1.almacen.repository.ProductoRepository;
 import com.grupo1.almacen.service.DetallePedidoService;
 import com.grupo1.almacen.service.PedidoService;
 import lombok.AllArgsConstructor;
+import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PostMapping;
-import org.springframework.web.bind.annotation.RequestBody;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
 
 import java.time.LocalDate;
 import java.util.ArrayList;
@@ -85,9 +84,12 @@ public class PedidoController {
         try {
             Date fechaCreacion = new Date();
             Pedido pedido = new Pedido();
-            pedido.setFechaCreacion(fechaCreacion);
             pedido.setNumero(pedidoService.generarNumeroDePedido());
+            pedido.setFechaCreacion(fechaCreacion);
+            //falta ->fechaRecibida;
+            pedido.setEstado(Estado.PENDIENTE);
             pedidoService.guardarPedido(pedido);
+            //falta ->usuario
             for (DetallePedidoDTO detallePedidoDTO : detallePedidos) {
 
                 DetallePedido detallePedido = new DetallePedido();
@@ -98,7 +100,6 @@ public class PedidoController {
                 detallePedido.setCantidad(detallePedidoDTO.getCantidad());
                 detallePedido.setProducto(producto);
                 Optional<Producto> productoOptional = productoRepository.findById(detallePedidoDTO.getId());
-
                 if (productoOptional.isPresent()) {
                     Producto p = productoOptional.get();
                     detallePedido.setPrecio(p.getCosto());
@@ -116,4 +117,17 @@ public class PedidoController {
                 .mensaje(mensaje)
                 .build();
     }
+    @PatchMapping("/pedidos/{id}/actualizarEstado")
+    @ResponseStatus(HttpStatus.NO_CONTENT)
+    public void actualizarEstadoPedido(
+            @PathVariable Long id,
+            @RequestParam String nuevoEstado) {
+        try{
+            pedidoService.actualizarEstadoPedido(id, nuevoEstado);
+        }catch(Exception e){
+            e.printStackTrace();
+
+        }
+    }
 }
+

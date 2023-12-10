@@ -7,4 +7,5 @@ public class MovimientoRequestDTO {
     private Long existenciaid;
     private Integer movimiento;
     private Integer cantidad;
+    private Long pedido;
 }

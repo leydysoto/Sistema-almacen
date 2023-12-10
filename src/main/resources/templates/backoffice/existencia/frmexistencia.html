@@ -62,7 +62,7 @@ th:replace="~{./base :: layout(~{::section})}">
 
         </div>
         <div class="col-md-3">
-            <div th:if="${pedido !=null}">
+            <div th:if="${pedido !=null}" >
                 <h3>Datos del Pedido</h3>
                 <strong>Pedido:</strong> [[${pedido.idPedido}]]<br>
                 <strong>Número:</strong> [[${pedido.numero}]]<br>
@@ -86,6 +86,15 @@ th:replace="~{./base :: layout(~{::section})}">
 
                     </li>
                 </ul>
+
+                <div >
+                    <label>Estado</label>
+                    <select id="estadoCombo" class="estadoCombo">
+                        <option th:data-pedido-id="${pedido.idPedido}" value="PENDIENTE">Pendiente</option>
+                        <option th:data-pedido-id="${pedido.idPedido}" value="HACIENDO">Haciendo</option>
+                        <option th:data-pedido-id="${pedido.idPedido}" value="HECHO">Hecho</option>
+                    </select>
+                </div>
 
 
             </div>
@@ -161,6 +170,8 @@ th:replace="~{./base :: layout(~{::section})}">
                     </div>
                     <input type="hidden" id="hddmovimiento" value="0">
                     <input type="hidden" id="hddCodigoExistencia" value="0">
+                    <input type="hidden" id="hddPedidoPendiente" value="0">
+
 
                 </div>
                 <div class="modal-footer">

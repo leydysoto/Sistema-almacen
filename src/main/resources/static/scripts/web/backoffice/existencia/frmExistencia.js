@@ -63,7 +63,6 @@ function listarCombos(){
 
     })
 
-
     $(document).on("click", "#btnguardar", function(){
         $.ajax({
             type: "POST",
@@ -75,7 +74,6 @@ function listarCombos(){
                 categoria: $("#cbocategoria").val(),
                 marca: $("#cbomarca").val(),
                 cantidad: $("#txtcantidad").val(),
-
             }),
             success: function(resultado){
                 alert(resultado.mensaje);
@@ -107,6 +105,7 @@ function listarCombos(){
         $("#txtcantidadMovimiento").val("");
         $("#hddmovimiento").val($(this).attr("data-movimiento"));
         $("#hddCodigoExistencia").val($(this).attr("data-exiscod"));
+        $("#hddPedidoPendiente").val(pedidoIdSeleccionado);
         $("#modalNuevoMovimiento").modal("show");
 
     })
@@ -122,6 +121,8 @@ function listarCombos(){
                 existenciaid: $("#hddCodigoExistencia").val(),
                 cantidad: $("#txtcantidadMovimiento").val(),
                 movimiento: $("#hddmovimiento").val(),
+                pedido:$("#hddPedidoPendiente").val()
+
 
             }),
             success: function(resultado){
@@ -173,7 +174,35 @@ function listarCombos(){
             }
         });
     }
+    //cuando seleccione "HACIENDO" almacenará el id en la variable
+    var pedidoIdSeleccionado;
 
+    //cuando seleccione  HECHO Y PEDIDO CAMBIARÁ la variable
 
+    $(document).on("change", "#estadoCombo", function () {
+        const idPedido= $(this).find(":selected").data("pedido-id");
+        const nuevoEstado = $(this).val();
+        if($(this).val()=="HECHO"){
+            pedidoIdSeleccionado = null;
+        }
+        else if($(this).val()=="PENDIENTE"){
+            pedidoIdSeleccionado = null;
+        }
+        else if ($(this).val() == "HACIENDO") {
+            pedidoIdSeleccionado = idPedido;
+        } else {
+            pedidoIdSeleccionado = null;
+        }
+        $.ajax({
+            url: `/pedidos/${idPedido}/actualizarEstado?nuevoEstado=${nuevoEstado}`,
+            type: 'PATCH',
+            success: function (data) {
+                //es un void
+            },
+            error: function (error) {
+                console.error('Error:', error);
+            }
+        });
+    });
 
 }
