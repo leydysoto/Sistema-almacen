@@ -65,6 +65,7 @@ function listarCombos(){
     })
 
     $(document).on("click", "#btnguardar", function(){
+        $(this).prop("disabled", true);
         $.ajax({
             type: "POST",
             url: "/existencias/guardar",
@@ -80,6 +81,7 @@ function listarCombos(){
                 alert(resultado.mensaje);
                 listarExistencias();
                 $("#modalNuevo").modal("hide");
+                $("#btnguardar").prop("disabled", false);
             },
             error:function (xhr,status,error){
                 if(xhr.response.JSON && xhr.responseJSON.mensaje){
