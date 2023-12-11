@@ -12,12 +12,12 @@ function limpiar(){
     $('#cbomedida').empty();
     $('#txtcantidad').val('');
 }
-function listarCombos(){
+function listarCombos() {
     $.ajax({
-        type:"GET",
-        url:"/existencias/categoria",
-        dataType:"json",
-        success:function (resultado) {
+        type: "GET",
+        url: "/existencias/categoria",
+        dataType: "json",
+        success: function (resultado) {
             $.each(resultado, function (index, value) {
                 $("#cbocategoria").append(
                     `<option value="${value.nombre}">${value.nombre} </option>`
@@ -27,8 +27,8 @@ function listarCombos(){
                 type: "GET",
                 url: "/existencias/marca",
                 dataType: "json",
-                success: function(resultado){
-                    $.each(resultado, function(index, value){
+                success: function (resultado) {
+                    $.each(resultado, function (index, value) {
                         $("#cbomarca").append(
                             `<option value="${value.nombre}">${value.nombre}</option>`
                         )
@@ -37,8 +37,8 @@ function listarCombos(){
                         type: "GET",
                         url: "/existencias/nombresproducto",
                         dataType: "json",
-                        success: function(resultado){
-                            $.each(resultado, function(index, value){
+                        success: function (resultado) {
+                            $.each(resultado, function (index, value) {
                                 $("#cbonombreproducto").append(
                                     `<option value="${value.nombre}">${value.nombre}</option>`
                                 )
@@ -47,8 +47,8 @@ function listarCombos(){
                                 type: "GET",
                                 url: "/existencias/medida",
                                 dataType: "json",
-                                success: function(resultado){
-                                    $.each(resultado, function(index, value){
+                                success: function (resultado) {
+                                    $.each(resultado, function (index, value) {
                                         $("#cbomedida").append(
                                             `<option value="${value.nombre}">${value.nombre}</option>`
                                         )
@@ -63,6 +63,7 @@ function listarCombos(){
         }
 
     })
+}
 
     $(document).on("click", "#btnguardar", function(){
         $(this).prop("disabled", true);
@@ -209,4 +210,3 @@ function listarCombos(){
         });
     });
 
-}
