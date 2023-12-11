@@ -9,6 +9,7 @@ function limpiar(){
     $('#cbonombreproducto').empty();
     $('#cbocategoria').empty();
     $('#cbomarca').empty();
+    $('#cbomedida').empty();
     $('#txtcantidad').val('');
 }
 function listarCombos(){
@@ -102,15 +103,17 @@ function listarCombos(){
 
 
     $(document).on("click",".btndisminuir",function (){
-        $("#txtcantidadMovimiento").val("");
-        $("#hddmovimiento").val($(this).attr("data-movimiento"));
-        $("#hddCodigoExistencia").val($(this).attr("data-exiscod"));
-        $("#hddPedidoPendiente").val(pedidoIdSeleccionado);
-        $("#modalNuevoMovimiento").modal("show");
+        if(pedidoIdSeleccionado!=null){
+            $("#txtcantidadMovimiento").val("");
+            $("#hddmovimiento").val($(this).attr("data-movimiento"));
+            $("#hddCodigoExistencia").val($(this).attr("data-exiscod"));
+            $("#hddPedidoPendiente").val(pedidoIdSeleccionado);
+            $("#modalNuevoMovimiento").modal("show");
+        }else{
+            console.log("no hay pedido que realizar")
+        }
 
     })
-
-
 
    $(document).on("click","#btnGuardarIncrementarDisminuir",function (){
         $.ajax({
@@ -121,8 +124,7 @@ function listarCombos(){
                 existenciaid: $("#hddCodigoExistencia").val(),
                 cantidad: $("#txtcantidadMovimiento").val(),
                 movimiento: $("#hddmovimiento").val(),
-                pedido:$("#hddPedidoPendiente").val()
-
+                pedidoid:$("#hddPedidoPendiente").val()
 
             }),
             success: function(resultado){

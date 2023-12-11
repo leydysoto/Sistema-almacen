@@ -5,11 +5,11 @@ import lombok.Data;
 @Builder
 @Data
 public class ExistenciaRequestDTO {
-    private Long idexistencia;
+    /*private Long idexistencia;*/
     private String nombre;
     private String categoria;
     private String marca;
-    private String medida;
-    private String tipoalmacen;
+    /*private String medida;
+    private String tipoalmacen;*/
     private Integer  cantidad;
 }

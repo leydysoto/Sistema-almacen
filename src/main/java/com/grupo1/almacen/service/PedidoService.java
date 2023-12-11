@@ -66,13 +66,9 @@ public class PedidoService {
                 return null;
             }
             return pedidoRepository.save(pedido);
-
-
         }catch (Exception e ){
             return null;
-
         }
-
     }
 
 
@@ -87,6 +83,7 @@ public class PedidoService {
                 .collect(Collectors.toList());
 
     }
+    //encontrar un pedido
     public PedidoResponse encontrarPedido(Long idPedido) {
         Optional<Pedido> pedidoOptional = pedidoRepository.findById(idPedido);
         if (pedidoOptional.isPresent()) {
@@ -140,8 +137,6 @@ public class PedidoService {
                 null;
     }
     //evitar nullos
-
-
 
     private CategoriaResponse mapCategoriaToCategoriaResponse(Categoria categoria) {
         return categoria != null ?

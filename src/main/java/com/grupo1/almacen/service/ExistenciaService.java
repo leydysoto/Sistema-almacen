@@ -21,6 +21,7 @@ import java.util.Optional;
 public class ExistenciaService {
     private ExistenciaRepository existenciaRepository;
     private ProductoRepository productoRepository;
+    private SalidaService salidaService;
 
     public List<ExistenciaResponse> listarExistencia() {
         List<Existencia> Existencias = existenciaRepository.findAll();
@@ -119,6 +120,9 @@ public class ExistenciaService {
                                     cantidadActual = (cantidadDisponible - movimientoRequestDTO.getCantidad()) + limiteMinimo;
                                     existencia.setCantidad(cantidadActual);
                                     mensaje = "se desconto " + movimientoRequestDTO.getCantidad();
+                                    //se crea la salida
+                                    /*Integer salida=salidaService.crearSalida(movimientoRequestDTO.getPedidoid(),producto,movimientoRequestDTO.getCantidad());*/
+
                                 } else {
                                     mensaje = "no se encuentra  disponible para esa cantidad,solo tenemos disponible "+cantidadDisponible;
                                     //podria hacer que descuente lo suficiente pero prefiero que la persona lo haga.
@@ -133,7 +137,7 @@ public class ExistenciaService {
                         mensaje = "debes ingresar un valor mayor  a 0";
                     }
                 } else {
-                    //
+
                     mensaje = "el producto no existe";
                 }
             } else {
