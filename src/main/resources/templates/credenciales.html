@@ -1,0 +1,33 @@
+<!DOCTYPE html>
+<html  lang="es" xmlns:th="http://www.w3.org/1999/xhtml" th:replace="~{base::layout(~{::section})}">>
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+  <section>
+    <div class="container  " style="max-width: 500px; margin: 0 auto;margin-top: 20px; padding: 20px;">
+      <h2  class="text-center">Modificar Credenciales</h2>
+        <form action="/empleados/credenciales/guardar" method="post" th:object="${user}"  class="border p-3 container d-flex align-items-center flex-column " >
+          <input type="hidden" th:field="*{id}">
+
+          <div class="mb-2 col-md-8 ">
+            <label class="text-left">Usuario:</label>
+            <input type="text" th:field="*{username}" class="form-control"/>
+
+          </div>
+
+          <div class="mb-2 col-md-8 ">
+            <label class="text-left">Nueva Contraseña:</label>
+            <input type="password" th:field="*{password}" class="form-control"/>
+          </div>
+
+          <button type="submit"class="btn btn-primary ">Guardar</button>
+        </form>
+
+    </div>
+
+  </section>
+
+</body>
+</html>

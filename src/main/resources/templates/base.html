@@ -148,7 +148,7 @@
                 </li>
                 <th:block th:if="${user==NULL}">
                     <li class="nav-item">
-                        <a class="nav-link" href="/register">Register</a>
+                        <a class="nav-link" href="/registroEmpleado">Register</a>
                     </li>
                     <li class="nav-item">
                         <a class="nav-link" href="/signin">Login</a>
@@ -198,7 +198,14 @@
                 <a th:href="@{/pedidos}" class="sub-item">áreas</a>
             </div>
         </div>
-        <div class="item"><a href="#"><i class="fas fa-cogs"></i>Setting</a></div>
+        <div class="item">
+            <a  class="sub-btn" href="#"><i class="fas fa-th"></i>empleados<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+                <a th:href="@{/empleados/listar}" class="sub-item">listar</a>
+                <a th:href="@{/registroEmpleado}" class="sub-item">registro</a>
+
+            </div>
+        </div>
         <div class="item"><a th:href="@{/logout}"><i class="fas fa-info-circle"></i>salir</a></div>
     </div>
 </div>

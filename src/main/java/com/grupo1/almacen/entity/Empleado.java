@@ -3,29 +3,24 @@ package com.grupo1.almacen.entity;
 import jakarta.persistence.*;
 import lombok.Data;
 
-import java.util.List;
-
 @Data
 @Entity
-public class User {
+@Table(name="empleado")
+public class Empleado {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Integer id;
-
     private String nombres;
-
-    @Column(unique = true)
-    private String username;
-
+    private String dni;
+    private String direccion;
     private String email;
-
     private String telefono;
-    private String password;
-
+    @OneToOne
+    @JoinColumn(name = "usuario_id")
+    private User user;
     @ManyToOne
-    @JoinColumn(name="id_role")
-    private Role role;
+    @JoinColumn(name = "cargo_id")
+    private Cargo cargo;
 
-    @OneToMany(mappedBy = "usuario")
-    private List<Pedido> listaPedidos;
+
 }

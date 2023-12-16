@@ -40,9 +40,9 @@ public class SecurityConfig {
                 .authorizeHttpRequests(
                 auth->
                         auth.requestMatchers("/styles/**", "/scripts/**","/uploads/**",
-                                "/","/register","/signin","/saveUser"
+                                        "/","/registroEmpleado","/signin","/guardarUsuario"
                                 ).permitAll()
-                                .requestMatchers("/marcas/**","/user/**","/categorias/**","/productos/**","/existencias/**","/backoffice/**","/pedidos/**","/medidas/**","/tipoalmacen/**","/proveedores/**","/reporte/**").hasRole("USER")
+                                .requestMatchers("/marcas/**","/user/**","/empleados/**","/categorias/**","/productos/**","/existencias/**","/backoffice/**","/pedidos/**","/medidas/**","/tipoalmacen/**","/proveedores/**","/reporte/**").hasAuthority("USER")
                                 .requestMatchers("/user/**").authenticated()
 
                 ).formLogin(formLogin ->
