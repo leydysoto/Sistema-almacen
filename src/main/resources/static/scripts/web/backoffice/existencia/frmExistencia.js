@@ -179,6 +179,7 @@ function listarCombos() {
             }
         });
     }
+    ////PEDIDO PRESENTE
     //cuando seleccione "HACIENDO" almacenará el id en la variable
     var pedidoIdSeleccionado;
 

@@ -79,7 +79,6 @@ th:replace="~{./base :: layout(~{::section})}">
                                 </p>
                             </div>
                             <div class="col-sm-4">
-                                <label>estado</label>
                                 <input type="checkbox"/>
                             </div>
                         </div>
@@ -90,14 +89,13 @@ th:replace="~{./base :: layout(~{::section})}">
                 <div >
                     <label>Estado</label>
                     <select id="estadoCombo" class="estadoCombo">
-                        <option th:data-pedido-id="${pedido.idPedido}" value="PENDIENTE">Pendiente</option>
-                        <option th:data-pedido-id="${pedido.idPedido}" value="HACIENDO">Haciendo</option>
-                        <option th:data-pedido-id="${pedido.idPedido}" value="HECHO">Hecho</option>
+                        <option th:data-pedido-id="${pedido.idPedido}" value="PENDIENTE" th:selected="${pedido.estado.toLowerCase() == 'pendiente'}">PENDIENTE</option>
+                        <option th:data-pedido-id="${pedido.idPedido}" value="HACIENDO" th:selected="${pedido.estado.toLowerCase() == 'haciendo'}">HACIENDO</option>
+                        <option th:data-pedido-id="${pedido.idPedido}" value="HECHO" th:selected="${pedido.estado.toLowerCase() == 'hecho'}" >HECHO</option>
                     </select>
                 </div>
-
-
             </div>
+
             <div th:unless="${pedido != null}">
                 <p>No se ha proporcionado un ID de pedido.</p>
             </div>
@@ -105,7 +103,7 @@ th:replace="~{./base :: layout(~{::section})}">
 
     </div>
 
-
+<!--MODALES DE AGREGAR AUMENTO Y DISMINUCIÓN-->
     <div class="modal fade" id="modalNuevo" tabindex="-1" aria-labelledby="exampleModalLabel" aria-hidden="true">
         <div class="modal-dialog">
             <div class="modal-content">

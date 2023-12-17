@@ -10,18 +10,12 @@ $(document).ready(() => {
                 let data = '';
                 resultado.forEach(element => {
 
-
-                    let opcionesEstado = `<select class="estado-pedido" data-id="${element.idPedido}">
-                                            <option value="PENDIENTE" ${element.estado === "PENDIENTE" ? "selected" : ""}>Pendiente</option>
-                                            <option value="HACIENDO" ${element.estado === "HACIENDO" ? "selected" : ""}>Haciendo</option>
-                                            <option value="HECHO" ${element.estado === "HECHO" ? "selected" : ""}>Hecho</option>
-                                        </select>`;
                     data += `<tr class="fila-pedido">
                       <td>${element.idPedido}</td>
                       <td>${element.numero}</td>
                       <td>${element.fechaCreacion}</td>
                       <td>${element.fechaRecibida}</td>
-                      <td>${opcionesEstado}</td>
+                      <td>${element.estado}</td>
                       <td>${element.usuario}</td>
                       <td>
                           <a href="#" class="btn btn-primary  btn-detalles"   data-id="${element.idPedido}"style="background-color: #bf790a; border: none; outline: none;" >Detalles</a>
@@ -74,11 +68,12 @@ $(document).ready(() => {
             </div>
             <div style="margin-bottom: 120px;" >
                 <h3>Estado del Pedido</h3>
-                <select id="estadoPedido" class="form-control  text-center">
-                    <option value="Pendiente">Pendiente</option>
-                    <option value="Hecho">Hecho</option>
-                    <option value="Haciendo">Haciendo</option>
+                <select id="estadoPedido" class="form-control text-center">
+                    <option value="PENDIENTE" ${pedido.estado.toLowerCase() === 'pendiente' ? 'selected' : ''}>PENDIENTE</option>
+                    <option value="HECHO" ${pedido.estado.toLowerCase() === 'hecho' ? 'selected' : ''}>HECHO</option>
+                    <option value="HACIENDO" ${pedido.estado.toLowerCase() === 'haciendo' ? 'selected' : ''}>HACIENDO</option>
                 </select>
+         
             </div>
             <div style="margin-bottom: 20px;">
                 <a href="/existencias/listar?idPedido=${pedido.idPedido}" class="btn btn-primary">EXISTENCIA</a>
@@ -87,6 +82,7 @@ $(document).ready(() => {
 
         $('.ladoderecho').html(detallesHtml);
     }
+    //ESTO NO ESTÁ FUNCIONANDO
     function cambiarDeEstado(){
         $('#estadoPedido').on('change', function() {
             const nuevoEstado = $(this).val();
@@ -95,9 +91,6 @@ $(document).ready(() => {
         });
 
     }
-
-
-
 
     listarPedidos();
     cambiarDeEstado();

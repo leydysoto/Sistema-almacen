@@ -72,7 +72,6 @@ public class PedidoService {
     }
 
 
-
     //crear una lista de los pedidos y sus detalles
     public List<PedidoResponse> listaPedidos(){
 

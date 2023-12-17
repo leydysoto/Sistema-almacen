@@ -32,6 +32,7 @@ public class PedidoController {
     private PedidoService pedidoService;
     private DetallePedidoService detallePedidoService;
 
+    //exhibir productos para realizar pedidos
     @GetMapping("/pedidos")
     public String lista() {
         return "backoffice/pedido/frmPedido";
@@ -67,9 +68,9 @@ public class PedidoController {
                     .build();
             productoResponses.add(productoResponse);
         });
-
         return productoResponses;
     }
+    //vizualizar los pedidos y sus detalles   solicitados
     @GetMapping("/pedidos/listar")
     public String muestralistaPedidos() {
         return "backoffice/pedido/pedido";
