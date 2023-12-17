@@ -1,8 +1,10 @@
 package com.grupo1.almacen.controller;
 
+import com.grupo1.almacen.configure.CustomUser;
 import com.grupo1.almacen.entity.DetallePedido;
 import com.grupo1.almacen.entity.Pedido;
 import com.grupo1.almacen.entity.Producto;
+import com.grupo1.almacen.entity.User;
 import com.grupo1.almacen.entity.dto.request.DetallePedidoDTO;
 import com.grupo1.almacen.entity.dto.response.ResultadoResponse;
 import com.grupo1.almacen.entity.dto.response.*;
@@ -12,6 +14,8 @@ import com.grupo1.almacen.service.DetallePedidoService;
 import com.grupo1.almacen.service.PedidoService;
 import lombok.AllArgsConstructor;
 import org.springframework.http.HttpStatus;
+import org.springframework.security.core.Authentication;
+import org.springframework.security.core.context.SecurityContextHolder;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
 
@@ -89,7 +93,14 @@ public class PedidoController {
             //falta ->fechaRecibida;
             pedido.setEstado(Estado.PENDIENTE);
             pedidoService.guardarPedido(pedido);
-            //falta ->usuario
+
+            Authentication authentication = SecurityContextHolder.getContext().getAuthentication();
+            CustomUser customUser = (CustomUser) authentication.getPrincipal();
+            User user=customUser.getUser();
+
+            pedido.setUsuario(user);
+
+
             for (DetallePedidoDTO detallePedidoDTO : detallePedidos) {
 
                 DetallePedido detallePedido = new DetallePedido();

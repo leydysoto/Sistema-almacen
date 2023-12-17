@@ -7,7 +7,7 @@ import org.springframework.security.core.userdetails.UserDetails;
 
 import java.util.Arrays;
 import java.util.Collection;
-
+//este seria mi get principal
 public class CustomUser implements UserDetails {
     private User user;
 
@@ -50,4 +50,11 @@ public class CustomUser implements UserDetails {
     public boolean isEnabled() {
         return true;
     }
+
+    //ME PERMITIRÁ ACCEDER AL USUARIO CUANDO USE EL getPrincipal de la authenticación
+    public User getUser() {
+        return user;
+    }
+
+
 }

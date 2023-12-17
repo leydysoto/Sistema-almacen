@@ -94,8 +94,8 @@ public class PedidoService {
         } else {
             return null;
         }
-
     }
+
     private PedidoResponse mapPedidoToPedidoResponse(Pedido pedido) {
         SimpleDateFormat dateFormatter = new SimpleDateFormat("yyyy-MM-dd");
         return PedidoResponse.builder()
@@ -104,7 +104,7 @@ public class PedidoService {
                 .fechaCreacion(dateFormatter.format(pedido.getFechaCreacion()))
                 .fechaRecibida(pedido.getFechaRecibida()!=null ?dateFormatter.format(pedido.getFechaRecibida()):null)
                 .estado(pedido.getEstado() != null ? pedido.getEstado().toString() : null)
-                .usuario(pedido.getUsuario()!= null ? pedido.getUsuario().getId() : null)
+                .usuario(pedido.getUsuario()!= null ? pedido.getUsuario().getUsername(): null)
                 .detallePedidos(mapDetallePedidosList(pedido.getDetallePedidos()))
                 .build();
     }

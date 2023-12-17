@@ -15,6 +15,6 @@ public class PedidoResponse {
     private String fechaCreacion;
     private String fechaRecibida;
     private String estado;
-    private Integer usuario;
+    private String usuario;
     List<DetallePedidoResponse>detallePedidos;
 }
