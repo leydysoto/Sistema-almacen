@@ -1,0 +1,45 @@
+<!DOCTYPE html>
+<html lang="en" xmlns:th="http://www.w3.org/1999/xhtml"
+      th:replace="~{base::layout(~{::section})}">
+<head>
+    <meta charset="UTF-8">
+    <title>Title</title>
+</head>
+<body>
+    <section>
+        <div class="container text-center">
+            <h1>Historial de Movimientos</h1>
+            <table class="table table-hover table-dark table-bordered border-primary table-sm align-middle ">
+                <thead>
+                <tr>
+                    <th>Historial ID</th>
+                    <th>Cantidad</th>
+                    <th>Tipo de Operación</th>
+                    <th>Fecha - Hora</th>
+                    <th>Nombre del Producto</th>
+                    <th>Foto</th>
+                </tr>
+                </thead>
+                <tbody>
+                <tr th:each="movimiento : ${movimientos}">
+                    <td th:text="${movimiento.historialid}"></td>
+                    <td th:text="${movimiento.cantidad}"></td>
+                    <td th:text="${movimiento.tipooperacion}"></td>
+                    <td th:text="${#temporals.format(movimiento.fecha, 'dd-MM-yyyy HH:mm:ss')}"></td>
+                    <td th:text="${movimiento.nombreproducto}"></td>
+                    <td>
+                        <img th:src="@{'/uploads/' + ${movimiento.foto}}" alt="${element.foto}" width="80" height="70"/>
+
+
+                    </td>
+                </tr>
+                </tbody>
+            </table>
+
+        </div>
+
+
+    </section>
+
+</body>
+</html>

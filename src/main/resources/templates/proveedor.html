@@ -23,9 +23,8 @@
                 <th>Direccion</th>
                 <th>Telefono</th>
                 <th>Correo</th>
-                <th>Tipo de Persona</th>
-                <th>Tipo de documento</th>
-                <th>Número de documento</th>
+                <th>Tipo de proveedor</th>
+                <th>Número de documento (RUC)</th>
                 <th>ACCIONES</th>
 
             </tr>
@@ -38,8 +37,7 @@
                 <td th:text="${prove.direccion}"></td>
                 <td th:text="${prove.telefono}"></td>
                 <td th:text="${prove.email}"></td>
-                <td  th:text="${prove.tipopersona.nombre}"></td>
-                <td th:text="${prove.tipodocumento.nombre}"></td>
+                <td  th:text="${prove.tipoproveedor}"></td>
                 <td th:text="${prove.numerodocumento}"></td>
                 <td>
                     <a th:href="@{'/proveedores/editar'+'/' + ${prove.id}}" class="btn btn-info" style="background-color: #bf790a; border: none; outline: none;">editar</a>

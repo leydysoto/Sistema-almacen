@@ -65,7 +65,7 @@ public class ExistenciaService {
         String mensaje = "existencia guardada";
         try {
             //Busco el producto segun sus propiedades
-            Optional<Producto> productoOptional = productoRepository.findFirstByNombreAndCategoriaNombreAndMarcaNombre(existenciaRequestDTO.getNombre(), existenciaRequestDTO.getCategoria(), existenciaRequestDTO.getMarca());
+            Optional<Producto> productoOptional = productoRepository.findFirstByNombreAndCategoriaNombreAndMarcaNombreAndMedidaNombre(existenciaRequestDTO.getNombre(), existenciaRequestDTO.getCategoria(), existenciaRequestDTO.getMarca(),existenciaRequestDTO.getMedida());
 
             if (productoOptional.isPresent()) {//producto existe  en la tabla producto ahora puedes agregarle a existencias
                 Producto producto = productoOptional.get();

@@ -9,7 +9,7 @@ public class ExistenciaRequestDTO {
     private String nombre;
     private String categoria;
     private String marca;
-    /*private String medida;
-    private String tipoalmacen;*/
+    private String medida;
+    /*private String tipoalmacen;*/
     private Integer  cantidad;
 }

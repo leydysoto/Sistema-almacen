@@ -199,11 +199,16 @@
             </div>
         </div>
         <div class="item">
+            <a  class="sub-btn" href="#"><i class="fas fa-th"></i>Movimientos<i class="fas fa-angle-right dropdown"></i></a>
+            <div class="sub-menu">
+                <a th:href="@{/user/historial}" class="sub-item">historial</a>
+            </div>
+        </div>
+        <div class="item">
             <a  class="sub-btn" href="#"><i class="fas fa-th"></i>empleados<i class="fas fa-angle-right dropdown"></i></a>
             <div class="sub-menu">
                 <a th:href="@{/empleados/listar}" class="sub-item">listar</a>
                 <a th:href="@{/registroEmpleado}" class="sub-item">registro</a>
-
             </div>
         </div>
         <div class="item"><a th:href="@{/logout}"><i class="fas fa-info-circle"></i>salir</a></div>

@@ -14,7 +14,7 @@ public interface ProductoRepository extends JpaRepository<Producto,Long> {
     @Query("SELECT DISTINCT p.nombre as nombre FROM Producto p")
     List<NombreProductoProjection> findUniqueProductNames();
 
-    Optional<Producto> findFirstByNombreAndCategoriaNombreAndMarcaNombre(String nombreProducto, String nombreCategoria, String nombreMarca);
+    Optional<Producto> findFirstByNombreAndCategoriaNombreAndMarcaNombreAndMedidaNombre(String nombreProducto, String nombreCategoria, String nombreMarca,String nombreMedida);
     List<Producto> findByNombre(String producto);
 
 

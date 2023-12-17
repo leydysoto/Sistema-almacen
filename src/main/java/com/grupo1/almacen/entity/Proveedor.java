@@ -1,5 +1,6 @@
 package com.grupo1.almacen.entity;
 
+
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -18,16 +19,10 @@ public class Proveedor {
     private String direccion;
     private String telefono;
     private String email;
+    private String tipoproveedor;
     private String numerodocumento;
     private boolean activo=true;
 
-    @ManyToOne
-    @JoinColumn(name="tipoPersona_id")
-    private TipoPersona tipopersona;
-
-    @ManyToOne
-    @JoinColumn(name="tipo_documento")
-    private TipoDocumento tipodocumento;
 
     //aqui se elimino el mappedBy
     @OneToMany()
