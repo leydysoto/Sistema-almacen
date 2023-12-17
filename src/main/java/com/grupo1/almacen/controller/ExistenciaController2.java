@@ -30,9 +30,6 @@ public class ExistenciaController2 {
     private MedidaRepository medidaRepository;
     private ProductoRepository productoRepository;
 
-
-
-
     @GetMapping("/existencias/listar")
     public String muestraexistencias(@RequestParam(name = "idPedido", required = false) Long idPedido, Model model){
         if(idPedido!=null){
@@ -42,7 +39,6 @@ public class ExistenciaController2 {
 
         }
         model.addAttribute("listaExistencias",existenciaService.listarExistencia());
-
         return "backoffice/existencia/frmexistencia";
     }
 
@@ -52,20 +48,18 @@ public class ExistenciaController2 {
         return existenciaService.listarExistencia();
     }
 
-
     @GetMapping("/existencias/categoria")
     @ResponseBody
     public List<Categoria>categoria(){
-
         return categoriaRepository.findAll();
     }
+
     @GetMapping("/existencias/marca")
     @ResponseBody
     public List<Marca>marca(){
-
         return marcaRepository.findAll();
-
     }
+
     @GetMapping("/existencias/medida")
     @ResponseBody
     public List<Medida>medida(){

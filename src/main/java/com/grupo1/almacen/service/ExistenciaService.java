@@ -98,6 +98,7 @@ public class ExistenciaService {
 
     public ResultadoResponse aumentarDisminuir(MovimientoRequestDTO movimientoRequestDTO) {
         String mensaje = "aumento satisfactorio";
+        Integer salida=null;
         try {
             Optional<Existencia> existenciaOptional = existenciaRepository.findById(movimientoRequestDTO.getExistenciaid());
             if (existenciaOptional.isPresent()) {
@@ -120,8 +121,9 @@ public class ExistenciaService {
                                     cantidadActual = (cantidadDisponible - movimientoRequestDTO.getCantidad()) + limiteMinimo;
                                     existencia.setCantidad(cantidadActual);
                                     mensaje = "se desconto " + movimientoRequestDTO.getCantidad();
-                                    //se crea la salida
-                                    /*Integer salida=salidaService.crearSalida(movimientoRequestDTO.getPedidoid(),producto,movimientoRequestDTO.getCantidad());*/
+
+                                    ////////////////se crea la salida
+                                    salida=salidaService.crearDetalleSalida(movimientoRequestDTO.getPedidoid(),producto,movimientoRequestDTO.getCantidad());
 
                                 } else {
                                     mensaje = "no se encuentra  disponible para esa cantidad,solo tenemos disponible "+cantidadDisponible;
@@ -147,6 +149,7 @@ public class ExistenciaService {
         } catch (Exception ex) {
             ex.printStackTrace();
             mensaje = "Algo salió mal. Detalles: " + ex.getMessage();
+            System.out.println(salida);
         }
         return ResultadoResponse
                 .builder()

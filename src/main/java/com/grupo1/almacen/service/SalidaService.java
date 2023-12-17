@@ -19,27 +19,30 @@ public class SalidaService {
     private PedidoRepository pedidoRepository;
     private DetalleSalidaRepository detalleSalidaRepository;
 
-    public Integer crearSalida(Long idPedido, Producto producto,Integer cantidad){
+    public Integer crearDetalleSalida(Long idPedido, Producto producto,Integer cantidad){
         Integer resultado=1;
         DetalleSalida nuevoDetalle = new DetalleSalida();
         nuevoDetalle.setCantidad(cantidad);
         nuevoDetalle.setProducto(producto);
         //encontrar salida mediante id del pedido
-        Optional<Salida> salidaExistente = salidaRepository.findFirstByPedidoId(idPedido);
+        Optional<Salida> salidaExistente = salidaRepository.findById(idPedido);
         if (salidaExistente.isPresent()) {
             Salida salidaEncontrada = salidaExistente.get();
             nuevoDetalle.setSalida(salidaEncontrada);
-
-
         }else{
-            //recien a ser una salida para ese pedido
+            //crear una salida
             Salida nuevaSalida=new Salida();
-            Pedido pedido=pedidoRepository.findById(idPedido).orElse(null);
-            nuevaSalida.setPedido(pedido);
             Date fecha=new Date();
+
+            Pedido pedido=pedidoRepository.findById(idPedido).get();
+            pedido.setFechaRecibida(fecha);
+            pedidoRepository.save(pedido);
+
+            nuevaSalida.setPedido(pedido);
             nuevaSalida.setFecha(fecha);
             Salida SalidaGuardada=salidaRepository.save(nuevaSalida);
             nuevoDetalle.setSalida(SalidaGuardada);
+
             resultado=0;
 
         }

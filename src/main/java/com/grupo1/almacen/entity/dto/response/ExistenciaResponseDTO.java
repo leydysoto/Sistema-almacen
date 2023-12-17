@@ -1,4 +1,4 @@
-package com.grupo1.almacen.entity.dto.request;
+package com.grupo1.almacen.entity.dto.response;
 
 import lombok.Data;
 
