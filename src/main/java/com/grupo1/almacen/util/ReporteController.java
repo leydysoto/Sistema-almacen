@@ -38,9 +38,6 @@ public class ReporteController {
 
 
 
-
-
-
     //videos para orientarme en la generacion de reportes
     //https://www.youtube.com/watch?v=YnZZm-P7lPs&t=1154s
     //la maldita programadora bytes
