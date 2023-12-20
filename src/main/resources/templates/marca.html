@@ -26,13 +26,12 @@
                 <td th:text="${marca.nombre}"></td>
                 <td>
                     <a th:href="@{'/marcas/editar'+'/'+${marca.id}}" class="btn btn-info" style="background-color: #bf790a; border: none; outline: none;">editar</a>
-
-
                     &nbsp;&nbsp;
                 </td>
             </tr>
             </tbody>
         </table>
+        <a th:href="@{/marcas/nuevo}" class="sub-item">AGREGAR</a>
 
     </div>
 

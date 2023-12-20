@@ -31,9 +31,9 @@ public class DashboardController {
     @GetMapping("/dashboard/categorias")
     @ResponseBody
     public List<Categoria> categorias() {
-
         return categoriaRepository.findAll();
     }
+
 
     @GetMapping("/dashboard/marcas")
     @ResponseBody
@@ -45,7 +45,6 @@ public class DashboardController {
     public List<ProductoResponse> listaProductos(){
         return dashboardService.listaProductos();
     }
-
     @GetMapping("/dashboard/existencias")
     @ResponseBody
     public List<ExistenciaResponse> listaExistencias(){

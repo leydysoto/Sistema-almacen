@@ -4,21 +4,54 @@
 <head>
     <meta charset="UTF-8">
     <title>Title</title>
-  <!--<script type="text/javascript" src="https://www.gstatic.com/charts/loader.js"></script>-->
 </head>
 <body>
     <section>
         <script src="https://cdn.jsdelivr.net/npm/chart.js"></script>
-        <div style="width: 800px; height: 400px;">
-            <canvas id="myChart" width="800" height="400"></canvas>
+        <div class="container-fluid">
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h1>Existencias</h1>
+                    <div style="width: 90%; height: 350px;">
+                        <canvas id="myChartExistencias"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h1>Categorias</h1>
+                    <div style="width: 90%; height: 350px;">
+                        <canvas id="myChartCategorias"></canvas>
+                    </div>
+                </div>
+            </div>
+            <div class="row">
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h1>Productos</h1>
+                    <div style="width: 90%; height: 350px;">
+                        <canvas id="myChartProductos"></canvas>
+                    </div>
+                </div>
+                <div class="col-lg-6 col-md-6 col-sm-12">
+                    <h1>Marcas</h1>
+                    <div style="width: 90%; height: 350px;">
+                        <canvas id="myChartMarcas"></canvas>
+                    </div>
+                </div>
+            </div>
         </div>
+
+
+
         <script>
-            Chart.defaults.color='fff'
+
+            //LLAMADA A LOS METODOS
             function mostrarCharts() {
                 fetchCoastersData("/dashboard/existencias","/dashboard/productos","/dashboard/categorias","/dashboard/marcas")
                     .then(([existencias,productos,categorias, marcas]) => {
                         console.log(existencias,productos,categorias, marcas);
-                        modeloCharts(existencias);
+                        existenciasCharts(existencias);
+                        categoriasCharts(categorias);
+                        productosCharts(productos);
+                        marcaCharts(marcas)
                     })
                     .catch(error => console.error("Error fetching data:", error));
             }
@@ -27,15 +60,18 @@
                 const promises =urls.map(url=>fetch(url).then(response=>response.json()))
                 return Promise.all(promises)
             }
-            /*function modeloCharts(categorias) {
-                const categoriaNombres = categorias.map(categoria => categoria.nombre);
-                const dataValues = Array(categorias.length).fill(1);
+            /*metodo de traer datos de las urls*/
+
+            function categoriasCharts(categorias) {
+                const cantidadCategorias = categorias.length;
+                const color=`rgba(${randomColor(0, 255)}, ${randomColor(0, 255)}, ${randomColor(0, 255)}, 1)`;
+                ;
                 const data = {
-                    labels: categoriaNombres,
+                    labels: ['Categorías'],
                     datasets: [{
-                        data: dataValues,
-                        borderColor: ['blue', 'red', 'yellow'],
-                        backgroundColor: ['blue', 'red', 'yellow'],
+                        data: [cantidadCategorias],
+                        borderColor: color,
+                        backgroundColor: color,
                         borderWidth: 1
                     }]
                 };
@@ -44,41 +80,82 @@
                         legend:{position:'left'}
                     }
                 }
-                new Chart('myChart',{type:'doughnut',data,options})
-            }*/
-          /*function modeloCharts(productos) {
-              const unicosProductoNombres = [...new Set(productos.map(producto => producto.nombre))];
+                new Chart('myChartCategorias',{type:'polarArea',data,options})
+            }
+            function marcaCharts(marcas) {
+                const cantidadmarcas = marcas.length;
+                const color=`rgba(${randomColor(0, 255)}, ${randomColor(0, 255)}, ${randomColor(0, 255)}, 1)`;
+                ;
+                const data = {
+                    labels: ['marcas'],
+                    datasets: [{
+                        data: [cantidadmarcas],
+                        borderColor: color,
+                        backgroundColor: color,
+                        borderWidth: 1
+                    }]
+                };
+                const options={
+                    plugins:{
+                        legend:{position:'left'}
+                    }
+                }
+                new Chart('myChartMarcas',{type:'polarArea',data,options})
+            }
 
-              const data = {
-                  labels: unicosProductoNombres,
-                  datasets: [{
-                      data: unicosProductoNombres.map(model => productos.filter(producto => producto.nombre === model).length),
-                      borderColor: ['blue', 'red', 'yellow', 'green'],
-                      backgroundColor: ['blue', 'red', 'yellow', 'green'],
-                      borderWidth: 1
-                  }]
-              };
-              const options = {
-                  plugins: {
-                      legend: {position: 'left'}
-                  }
-              }
-              new Chart('myChart', {type: 'doughnut', data, options})
-          }*/
-
-            function modeloCharts(existencias) {
-
+            function existenciasCharts(existencias){
                 const unicosProductoNombres = [...new Set(existencias.map(existencia => existencia.producto.nombre))];
 
+                const colors=unicosProductoNombres.map(c=>
+                    `rgba(${randomColor(255,0)},
+                    ${randomColor(255,0)},
+                    ${randomColor(255,0)},1)`
+                );
                 const data = {
                     labels: unicosProductoNombres,
                     datasets: [{
+                        label:['existencias'],
                         data: unicosProductoNombres.map(model =>{const cantidadTotal = existencias
                             .filter(existencia => existencia.producto.nombre === model)
                             .reduce((total, existencia) => total + existencia.cantidad, 0);
                             return cantidadTotal;}),
-                        borderColor: ['blue', 'red', 'yellow', 'green'],
-                        backgroundColor: ['blue', 'red', 'yellow', 'green'],
+                        borderColor:colors,
+                        backgroundColor: colors,
+                        borderWidth: 1
+                    }]
+                };
+                const options = {
+                    scales: {
+                        y: {
+                            beginAtZero: true
+                        }
+                    },
+                    plugins: {
+                        legend: { display: false }
+                    },
+                    indexAxis: 'x', // Mantener la orientación horizontal
+                    elements: {
+                        bar: {
+                            barPercentage: 0.7, // Ajustar el ancho de las barras
+                        }
+                    }
+                };
+                new Chart('myChartExistencias',{type: 'bar', data, options} )
+            }
+
+            function productosCharts(productos) {
+                const unicosProductoNombres = [...new Set(productos.map(producto => producto.nombre))];
+                const colors=unicosProductoNombres.map(c=>
+                    `rgba(${randomColor(255,0)},
+                    ${randomColor(255,0)},
+                    ${randomColor(255,0)},1)`
+                );
+                const data = {
+                    labels: unicosProductoNombres,
+                    datasets: [{
+                        data: unicosProductoNombres.map(model => productos.filter(producto => producto.nombre === model).length),
+                        borderColor:colors,
+                        backgroundColor: colors,
                         borderWidth: 1
                     }]
                 };
@@ -87,8 +164,14 @@
                         legend: {position: 'left'}
                     }
                 }
-                new Chart('myChart', {type: 'doughnut', data, options})
+                new Chart('myChartProductos', {type: 'doughnut', data, options})
             }
+
+            //método para los colores
+            function randomColor(max,min){
+                return Math.random()*(max-min)+min;
+            }
+            //método para los colores
 
             mostrarCharts();
         </script>
