@@ -8,6 +8,10 @@
     <script th:src="@{/scripts/bootstrap/bootstrap.bundle.js}" type="text/javascript"></script>
     <script th:src="@{/scripts/jquery/jquery.js}" type="text/javascript"></script>
 
+    <!--para el usu de datatable de jquery-->
+    <link rel="stylesheet" type="text/css" href="https://cdn.datatables.net/1.11.5/css/jquery.dataTables.css">
+    <script src="https://cdn.datatables.net/1.11.5/js/jquery.dataTables.js"></script>
+
     <script>
         function toggleSidebar() {
             var sidebar = document.getElementById("side-bar");
@@ -36,17 +40,19 @@
 
         body{
             background-color:white;
+
         }
 
         .side-bar{
             background-color: #333;
             width: 320px;
-            height: 100%;
-            position: fixed;
+            min-height: 100vh;
+            position: absolute;
             top:60px;
             left: 0;
             transition: 0.6s ease;
             transition-property: left;
+            z-index: 1000;
         }
 
         .side-bar.active{

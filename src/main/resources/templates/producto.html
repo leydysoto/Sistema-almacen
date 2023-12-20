@@ -12,7 +12,7 @@
 <section>
     <div class="container text-center">
         <h2>Productos</h2>
-        <table class="table table-hover table-dark table-bordered border-primary table-sm align-middle ">
+        <table class="table table-hover table-dark table-bordered border-primary table-sm align-middle " id="miTabla">
             <thead>
             <tr>
                 <th>ID</th>
@@ -45,7 +45,11 @@
         </table>
         <a th:href="@{/productos/nuevo}" class="sub-item">AGREGAR</a>
     </div>
-
+    <script>
+        $(document).ready(function() {
+            $('#miTabla').DataTable();
+        });
+    </script>
 </section>
 
 

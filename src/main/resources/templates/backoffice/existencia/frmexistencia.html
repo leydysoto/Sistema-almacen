@@ -62,7 +62,7 @@ th:replace="~{./base :: layout(~{::section})}">
 
         </div>
         <div class="col-md-3">
-            <div th:if="${pedido !=null}" >
+            <div th:if="${pedido !=null}" style="background-color: #f0f0f0; border: 1px solid #ccc;">
                 <h3>Datos del Pedido</h3>
                 <strong>Pedido:</strong> [[${pedido.idPedido}]]<br>
                 <strong>Número:</strong> [[${pedido.numero}]]<br>
@@ -96,7 +96,7 @@ th:replace="~{./base :: layout(~{::section})}">
                 </div>
             </div>
 
-            <div th:unless="${pedido != null}">
+            <div th:unless="${pedido != null}" style="background-color: black; border: 1px solid #c3e6cb; border-radius: 5px; color:white; font-weight: bold">
                 <p>No se ha proporcionado un ID de pedido.</p>
             </div>
         </div>
