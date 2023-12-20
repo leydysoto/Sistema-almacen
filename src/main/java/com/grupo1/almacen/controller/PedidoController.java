@@ -70,6 +70,8 @@ public class PedidoController {
         });
         return productoResponses;
     }
+
+
     //vizualizar los pedidos y sus detalles   solicitados
     @GetMapping("/pedidos/listar")
     public String muestralistaPedidos() {

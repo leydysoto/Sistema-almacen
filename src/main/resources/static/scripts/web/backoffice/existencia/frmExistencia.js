@@ -76,6 +76,7 @@ function listarCombos() {
                 nombre: $("#cbonombreproducto").val(),
                 categoria: $("#cbocategoria").val(),
                 marca: $("#cbomarca").val(),
+                medida: $("#cbomedida").val(),
                 cantidad: $("#txtcantidad").val(),
             }),
             success: function(resultado){

@@ -42,7 +42,7 @@ public class SecurityConfig {
                         auth.requestMatchers("/styles/**", "/scripts/**","/uploads/**",
                                         "/","/registroEmpleado","/signin","/guardarUsuario"
                                 ).permitAll()
-                                .requestMatchers("/marcas/**","/user/**","/empleados/**","/categorias/**","/productos/**","/existencias/**","/backoffice/**","/pedidos/**","/medidas/**","/tipoalmacen/**","/proveedores/**","/reporte/**").hasAuthority("USER")
+                                .requestMatchers("/marcas/**","/user/**","/empleados/**","/categorias/**","/productos/**","/existencias/**","/backoffice/**","/pedidos/**","/medidas/**","/tipoalmacen/**","/proveedores/**","/reporte/**","/dashboard/**").hasAuthority("USER")
                                 .requestMatchers("/user/**").authenticated()
 
                 ).formLogin(formLogin ->

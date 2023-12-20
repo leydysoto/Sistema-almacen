@@ -121,6 +121,10 @@ public class PedidoService {
                 .producto(mapProductoToProductoResponse(detallePedido.getProducto()))
                 .build();
     }
+
+    ///producto response
+
+
     private ProductoResponse mapProductoToProductoResponse(Producto producto) {
         return producto != null ?
                 ProductoResponse.builder()
