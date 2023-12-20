@@ -15,14 +15,12 @@
         <script>
             Chart.defaults.color='fff'
             function mostrarCharts() {
-                fetchCoastersData("/dashboard/productos","/dashboard/categorias","/dashboard/marcas","/dashboard/productos")
-                    .then(([productos,categorias, marcas]) => {
-                        console.log(productos,categorias, marcas);
-                        modeloCharts(productos);
+                fetchCoastersData("/dashboard/existencias","/dashboard/productos","/dashboard/categorias","/dashboard/marcas")
+                    .then(([existencias,productos,categorias, marcas]) => {
+                        console.log(existencias,productos,categorias, marcas);
+                        modeloCharts(existencias);
                     })
                     .catch(error => console.error("Error fetching data:", error));
-
-
             }
             /*metodo de traer datos de las urls*/
             const fetchCoastersData=(...urls)=>{
@@ -48,25 +46,50 @@
                 }
                 new Chart('myChart',{type:'doughnut',data,options})
             }*/
-            function modeloCharts(productos) {
-                const unicosProductoNombres = [...new Set (productos.map(producto => producto.nombre))];
+          /*function modeloCharts(productos) {
+              const unicosProductoNombres = [...new Set(productos.map(producto => producto.nombre))];
+
+              const data = {
+                  labels: unicosProductoNombres,
+                  datasets: [{
+                      data: unicosProductoNombres.map(model => productos.filter(producto => producto.nombre === model).length),
+                      borderColor: ['blue', 'red', 'yellow', 'green'],
+                      backgroundColor: ['blue', 'red', 'yellow', 'green'],
+                      borderWidth: 1
+                  }]
+              };
+              const options = {
+                  plugins: {
+                      legend: {position: 'left'}
+                  }
+              }
+              new Chart('myChart', {type: 'doughnut', data, options})
+          }*/
+
+            function modeloCharts(existencias) {
+
+                const unicosProductoNombres = [...new Set(existencias.map(existencia => existencia.producto.nombre))];
 
                 const data = {
                     labels: unicosProductoNombres,
                     datasets: [{
-                        data: unicosProductoNombres.map(model=>productos.filter(producto=>producto.nombre===model).length),
-                        borderColor: ['blue', 'red', 'yellow','green'],
-                        backgroundColor: ['blue', 'red', 'yellow','green'],
+                        data: unicosProductoNombres.map(model =>{const cantidadTotal = existencias
+                            .filter(existencia => existencia.producto.nombre === model)
+                            .reduce((total, existencia) => total + existencia.cantidad, 0);
+                            return cantidadTotal;}),
+                        borderColor: ['blue', 'red', 'yellow', 'green'],
+                        backgroundColor: ['blue', 'red', 'yellow', 'green'],
                         borderWidth: 1
                     }]
                 };
-                const options={
-                    plugins:{
-                        legend:{position:'left'}
+                const options = {
+                    plugins: {
+                        legend: {position: 'left'}
                     }
                 }
-                new Chart('myChart',{type:'doughnut',data,options})
+                new Chart('myChart', {type: 'doughnut', data, options})
             }
+
             mostrarCharts();
         </script>
 

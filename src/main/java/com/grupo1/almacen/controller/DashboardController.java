@@ -3,6 +3,7 @@ package com.grupo1.almacen.controller;
 import com.grupo1.almacen.DashboardUtil.DashboardService;
 import com.grupo1.almacen.entity.Categoria;
 import com.grupo1.almacen.entity.Marca;
+import com.grupo1.almacen.entity.dto.response.ExistenciaResponse;
 import com.grupo1.almacen.entity.dto.response.ProductoResponse;
 import com.grupo1.almacen.repository.CategoriaRepository;
 import com.grupo1.almacen.repository.MarcaRepository;
@@ -19,12 +20,13 @@ public class DashboardController {
 
     private CategoriaRepository categoriaRepository;
     private MarcaRepository marcaRepository;
-    private DashboardService productoService;
+    private DashboardService dashboardService;
 
     @GetMapping("/dashboard")
     public String dashboard() {
         return "dashboard";
     }
+
 
     @GetMapping("/dashboard/categorias")
     @ResponseBody
@@ -41,8 +43,13 @@ public class DashboardController {
     @GetMapping("/dashboard/productos")
     @ResponseBody
     public List<ProductoResponse> listaProductos(){
-        return productoService.listaProductos();
+        return dashboardService.listaProductos();
+    }
 
+    @GetMapping("/dashboard/existencias")
+    @ResponseBody
+    public List<ExistenciaResponse> listaExistencias(){
+        return dashboardService.listarExistencias();
     }
 
 }
